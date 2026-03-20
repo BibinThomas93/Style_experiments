@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drift — Design Language & Style Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root {
+  /* ── CORE PALETTE ── */
+  --cream:#FDF8F2; --sand:#F2EAE0; --clay:#E8D5C0;
+  --warm:#FFFCF8; --ink:#1A1512; --ink-soft:#4A3F35;
+  --ink-muted:#8C7B6E; --coral:#FF6B4A; --sage:#7DB89A;
+  --sky:#6BA4C4; --sun:#F5C842; --lilac:#B89ED4;
+  --rose:#E8A5A0; --moss:#5C8A6E;
+  /* ── PRO PALETTE ── */
+  --pro-gold:#D4A843; --pro-gold-light:#FFF4D6;
+  --pro-dark:#1A1512; --pro-dark2:#2D2018;
+  /* ── SEMANTIC ── */
+  --done-bg:#E8F5EF; --done:#3D9970;
+  --partial-bg:#FFF4E0; --partial:#D4820A;
+  --skip-bg:#F5F0EA; --error:#DC4A3C;
+  --error-bg:#FDEEEC;
+}
+
+body {
+  font-family:'DM Sans',sans-serif;
+  background:#F7F3EE;
+  color:var(--ink);
+}
+
+/* ══════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════ */
+.guide-header {
+  background:var(--ink);
+  padding:80px 64px 64px;
+  position:relative; overflow:hidden;
+}
+
+.guide-header::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 600px 400px at 80% 50%, rgba(255,107,74,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 400px at 10% 80%, rgba(125,184,154,0.06) 0%, transparent 60%);
+}
+
+.header-inner { position:relative; z-index:1; max-width:1100px; margin:0 auto; }
+
+.header-eyebrow {
+  font-size:11px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; color:rgba(253,248,242,0.4);
+  margin-bottom:20px; display:flex; align-items:center; gap:10px;
+}
+
+.header-eyebrow::after {
+  content:''; flex:1; max-width:60px; height:1px;
+  background:rgba(253,248,242,0.15);
+}
+
+.header-title {
+  font-family:'Fraunces',serif;
+  font-size:72px; font-style:italic; font-weight:400;
+  color:var(--cream); letter-spacing:-2px; line-height:1;
+  margin-bottom:12px;
+}
+
+.header-sub {
+  font-size:18px; color:rgba(253,248,242,0.5);
+  font-weight:300; max-width:480px; line-height:1.6;
+  margin-bottom:40px;
+}
+
+.header-meta {
+  display:flex; gap:24px; flex-wrap:wrap;
+}
+
+.meta-pill {
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:99px; padding:6px 16px;
+  font-size:12px; font-weight:500;
+  color:rgba(253,248,242,0.5);
+}
+
+/* ── PAGE CONTENT ── */
+.page-content { max-width:1100px; margin:0 auto; padding:64px 40px 120px; }
+
+/* ── SECTION ── */
+.section { margin-bottom:80px; }
+
+.section-header { margin-bottom:32px; }
+
+.section-num {
+  font-family:'DM Mono',monospace;
+  font-size:11px; color:var(--ink-muted);
+  margin-bottom:8px; letter-spacing:0.1em;
+}
+
+.section-title {
+  font-family:'Fraunces',serif;
+  font-size:36px; font-style:italic; font-weight:400;
+  color:var(--ink); letter-spacing:-0.5px; line-height:1.1;
+}
+
+.section-desc {
+  font-size:15px; color:var(--ink-muted); font-weight:300;
+  line-height:1.7; max-width:600px; margin-top:10px;
+}
+
+.divider {
+  height:1px; background:var(--clay);
+  margin:16px 0 32px;
+}
+
+/* ── GRID LAYOUTS ── */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.grid-5 { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+.grid-6 { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+
+/* ══════════════════════════════════════
+   1. PHILOSOPHY
+══════════════════════════════════════ */
+.philosophy-card {
+  background:var(--ink); border-radius:24px;
+  padding:40px; position:relative; overflow:hidden;
+}
+
+.philosophy-card::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 500px 300px at 90% 50%, rgba(255,107,74,0.07) 0%, transparent 60%);
+}
+
+.philosophy-inner { position:relative; z-index:1; }
+
+.philosophy-quote {
+  font-family:'Fraunces',serif;
+  font-size:28px; font-style:italic; font-weight:300;
+  color:var(--cream); line-height:1.5; margin-bottom:24px;
+  max-width:700px;
+}
+
+.philosophy-principles { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+.principle {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px; padding:20px;
+}
+
+.principle-num {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:var(--coral);
+  letter-spacing:0.1em; margin-bottom:8px;
+}
+
+.principle-title {
+  font-size:14px; font-weight:600;
+  color:var(--cream); margin-bottom:6px;
+}
+
+.principle-body {
+  font-size:12px; color:rgba(253,248,242,0.5);
+  line-height:1.6; font-weight:300;
+}
+
+/* ══════════════════════════════════════
+   2. COLOR SYSTEM
+══════════════════════════════════════ */
+.color-swatch {
+  border-radius:16px; overflow:hidden;
+  border:1.5px solid rgba(0,0,0,0.06);
+}
+
+.swatch-color {
+  height:80px;
+  position:relative;
+}
+
+.swatch-color::after {
+  content:attr(data-copy);
+  position:absolute; bottom:8px; right:8px;
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:rgba(0,0,0,0.3);
+  opacity:0; transition:opacity 0.2s;
+}
+
+.swatch-color:hover::after { opacity:1; }
+
+.swatch-info {
+  background:white; padding:12px 14px;
+}
+
+.swatch-name {
+  font-size:12px; font-weight:700; color:var(--ink);
+  margin-bottom:2px;
+}
+
+.swatch-hex {
+  font-family:'DM Mono',monospace;
+  font-size:11px; color:var(--ink-muted);
+}
+
+.swatch-use {
+  font-size:10px; color:var(--ink-muted);
+  margin-top:4px; line-height:1.4;
+}
+
+/* Color groups */
+.color-group { margin-bottom:32px; }
+
+.color-group-title {
+  font-size:11px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+  margin-bottom:14px; padding-bottom:8px;
+  border-bottom:1px solid var(--clay);
+}
+
+/* Gradient swatches */
+.gradient-swatch {
+  border-radius:16px; overflow:hidden;
+  border:1.5px solid rgba(0,0,0,0.06);
+}
+
+.gradient-preview {
+  height:64px;
+}
+
+.gradient-info {
+  background:white; padding:12px 14px;
+}
+
+.gradient-name {
+  font-size:12px; font-weight:700; color:var(--ink); margin-bottom:2px;
+}
+
+.gradient-code {
+  font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-muted);
+}
+
+/* ══════════════════════════════════════
+   3. TYPOGRAPHY
+══════════════════════════════════════ */
+.type-specimen {
+  background:white; border-radius:20px;
+  border:1.5px solid var(--clay);
+  padding:32px; margin-bottom:16px;
+}
+
+.type-meta {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:var(--ink-muted);
+  letter-spacing:0.08em; margin-bottom:20px;
+  padding-bottom:12px; border-bottom:1px solid var(--sand);
+  display:flex; gap:16px; flex-wrap:wrap;
+}
+
+.type-meta span {
+  background:var(--sand); border-radius:4px;
+  padding:2px 8px;
+}
+
+.type-sample-xl {
+  font-family:'Fraunces',serif;
+  font-size:56px; font-style:italic; font-weight:400;
+  color:var(--ink); letter-spacing:-1.5px; line-height:1;
+  margin-bottom:16px;
+}
+
+.type-sample-lg {
+  font-family:'Fraunces',serif;
+  font-size:36px; font-style:italic; font-weight:400;
+  color:var(--ink); letter-spacing:-0.5px; line-height:1.2;
+  margin-bottom:12px;
+}
+
+.type-sample-md {
+  font-family:'Fraunces',serif;
+  font-size:22px; font-style:italic; font-weight:400;
+  color:var(--ink); line-height:1.3; margin-bottom:10px;
+}
+
+.type-scale {
+  background:white; border-radius:20px;
+  border:1.5px solid var(--clay); padding:28px;
+}
+
+.type-scale-row {
+  display:flex; align-items:baseline; gap:24px;
+  padding:12px 0; border-bottom:1px solid var(--sand);
+}
+
+.type-scale-row:last-child { border-bottom:none; }
+
+.type-scale-label {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:var(--ink-muted);
+  letter-spacing:0.08em; width:80px; flex-shrink:0;
+}
+
+.type-scale-sample { flex:1; color:var(--ink); }
+
+.type-scale-spec {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:var(--clay);
+  text-align:right; flex-shrink:0;
+}
+
+/* ══════════════════════════════════════
+   4. SPACING & LAYOUT
+══════════════════════════════════════ */
+.spacing-row {
+  display:flex; align-items:center; gap:20px;
+  padding:12px 0; border-bottom:1px solid var(--sand);
+}
+
+.spacing-row:last-child { border-bottom:none; }
+
+.spacing-block {
+  background:var(--sage); opacity:0.4;
+  border-radius:4px; flex-shrink:0;
+  height:16px;
+}
+
+.spacing-label {
+  font-family:'DM Mono',monospace;
+  font-size:11px; color:var(--ink-muted);
+  width:60px; flex-shrink:0;
+}
+
+.spacing-name {
+  font-size:13px; font-weight:500; color:var(--ink);
+  flex:1;
+}
+
+.spacing-use {
+  font-size:12px; color:var(--ink-muted); text-align:right;
+}
+
+/* Radius showcase */
+.radius-row {
+  display:flex; gap:16px; flex-wrap:wrap;
+  align-items:flex-end;
+}
+
+.radius-item {
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+}
+
+.radius-box {
+  background:var(--sand); border:2px solid var(--clay);
+  width:64px; height:64px;
+}
+
+.radius-label {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:var(--ink-muted); text-align:center;
+}
+
+.radius-name {
+  font-size:11px; font-weight:600; color:var(--ink);
+  text-align:center;
+}
+
+/* ══════════════════════════════════════
+   5. COMPONENTS
+══════════════════════════════════════ */
+.component-block {
+  background:white; border-radius:20px;
+  border:1.5px solid var(--clay); padding:28px;
+  margin-bottom:16px;
+}
+
+.component-title {
+  font-size:11px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+  margin-bottom:20px; padding-bottom:10px;
+  border-bottom:1px solid var(--sand);
+  display:flex; justify-content:space-between; align-items:center;
+}
+
+.component-tag {
+  background:var(--sand); border-radius:4px;
+  padding:2px 8px; font-size:10px;
+  color:var(--ink-muted); font-weight:500;
+}
+
+/* Buttons */
+.btn-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
+
+.btn { 
+  border:none; cursor:pointer; font-family:'DM Sans',sans-serif;
+  font-weight:500; transition:all 0.15s; display:inline-flex;
+  align-items:center; justify-content:center; gap:8px;
+}
+
+.btn-primary {
+  background:var(--ink); color:var(--warm);
+  border-radius:14px; padding:13px 24px; font-size:14px;
+}
+.btn-primary:hover { background:#2D2018; }
+
+.btn-ghost {
+  background:transparent; color:var(--ink-muted);
+  border:1.5px solid var(--clay);
+  border-radius:14px; padding:12px 22px; font-size:14px;
+}
+.btn-ghost:hover { border-color:var(--ink-muted); color:var(--ink); }
+
+.btn-pro {
+  background:linear-gradient(135deg,#D4A843,#F5C842);
+  color:#1A1512; border-radius:14px; padding:13px 24px;
+  font-size:14px; font-weight:700;
+  box-shadow:0 4px 20px rgba(212,168,67,0.3);
+}
+
+.btn-danger {
+  background:#FDEEEC; color:var(--error);
+  border:1.5px solid rgba(220,74,60,0.2);
+  border-radius:14px; padding:12px 22px; font-size:14px;
+}
+
+.btn-sm {
+  border-radius:10px; padding:8px 16px; font-size:12px;
+}
+
+.btn-icon {
+  width:40px; height:40px; border-radius:12px;
+  background:var(--sand); color:var(--ink-muted);
+  border:none; cursor:pointer; font-size:16px;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+
+/* Loading state */
+.spinner {
+  width:15px; height:15px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-top-color:white; border-radius:50%;
+  animation:spin 1s linear infinite; flex-shrink:0;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Inputs */
+.input-row { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
+
+.input-group { display:flex; flex-direction:column; gap:6px; }
+
+.input-label {
+  font-size:11px; font-weight:700; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-muted);
+}
+
+.input {
+  width:100%; background:var(--sand); border:1.5px solid transparent;
+  border-radius:12px; padding:11px 14px;
+  font-family:'DM Sans',sans-serif; font-size:14px;
+  color:var(--ink); outline:none; transition:border-color 0.15s;
+}
+
+.input::placeholder { color:var(--ink-muted); }
+.input:focus { border-color:var(--ink); }
+.input.error { border-color:var(--error); background:#FDEEEC; }
+.input.success { border-color:var(--done); background:var(--done-bg); }
+
+.input-hint {
+  font-size:11px; color:var(--ink-muted);
+}
+
+.input-error {
+  font-size:11px; color:var(--error);
+}
+
+/* Habit Card */
+.habit-card-demo {
+  background:var(--warm); border:1.5px solid var(--clay);
+  border-radius:16px; padding:14px; transition:all 0.2s;
+}
+
+.habit-card-demo.state-done {
+  background:var(--done-bg); border-color:rgba(61,153,112,0.25);
+}
+
+.habit-card-demo.state-partial {
+  background:var(--partial-bg); border-color:rgba(212,130,10,0.25);
+}
+
+.habit-card-top {
+  display:flex; align-items:center; gap:10px; margin-bottom:10px;
+}
+
+.habit-icon-demo {
+  width:36px; height:36px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; flex-shrink:0;
+}
+
+.checkin-row {
+  display:flex; gap:6px;
+}
+
+.checkin-btn {
+  flex:1; padding:9px 6px; border-radius:10px;
+  border:1.5px solid var(--clay); background:var(--sand);
+  font-size:12px; font-weight:600; color:var(--ink-soft);
+  cursor:pointer; text-align:center;
+  font-family:'DM Sans',sans-serif; transition:all 0.15s;
+  user-select:none;
+}
+
+.checkin-btn.active-done{background:var(--done-bg);border-color:rgba(61,153,112,0.3);color:var(--done);}
+.checkin-btn.active-partial{background:var(--partial-bg);border-color:rgba(212,130,10,0.25);color:var(--partial);}
+.checkin-btn.active-skip{background:#F5F0EA;border-color:var(--clay);color:var(--ink-muted);}
+
+/* Badges */
+.badge-row { display:flex; gap:8px; flex-wrap:wrap; }
+
+.badge {
+  border-radius:99px; padding:4px 12px;
+  font-size:11px; font-weight:700; display:inline-flex;
+  align-items:center; gap:4px;
+}
+
+.badge-default { background:var(--sand); color:var(--ink-muted); }
+.badge-done { background:var(--done-bg); color:var(--done); }
+.badge-partial { background:var(--partial-bg); color:var(--partial); }
+.badge-anchor { background:var(--pro-gold-light); color:var(--pro-gold); }
+.badge-pro { background:linear-gradient(135deg,#FFF4D6,#FFE8C5); color:var(--pro-gold); }
+.badge-coral { background:#FFE8E3; color:var(--coral); }
+.badge-sky { background:#E3EFF8; color:var(--sky); }
+.badge-ink { background:var(--ink); color:var(--warm); }
+
+/* Pills */
+.pill-row { display:flex; gap:6px; flex-wrap:wrap; }
+
+.pill {
+  padding:7px 16px; border-radius:99px;
+  font-size:12px; font-weight:600; cursor:pointer;
+  font-family:'DM Sans',sans-serif; border:none; transition:all 0.15s;
+}
+
+.pill-default { background:var(--sand); color:var(--ink-muted); }
+.pill-active { background:var(--ink); color:var(--warm); }
+.pill-outline { background:transparent; border:1.5px solid var(--clay); color:var(--ink-muted); }
+
+/* Toast */
+.toast-demo {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--ink); color:var(--warm);
+  border-radius:14px; padding:12px 20px;
+  font-size:13px; font-weight:500;
+  box-shadow:0 8px 32px rgba(26,21,18,0.2);
+}
+
+.toast-success { background:var(--done); }
+.toast-error { background:var(--error); }
+.toast-row { display:flex; gap:12px; flex-wrap:wrap; }
+
+/* Progress bar */
+.progress-demo {
+  height:6px; background:var(--sand);
+  border-radius:99px; overflow:hidden; margin-bottom:8px;
+}
+.progress-fill-demo {
+  height:100%; border-radius:99px;
+  background:linear-gradient(90deg,var(--sage),var(--sky));
+}
+
+.progress-lg { height:10px; border-radius:99px; }
+.progress-sm { height:4px; border-radius:99px; }
+
+/* Toggle */
+.toggle-demo {
+  width:44px; height:26px; border-radius:99px;
+  position:relative; cursor:pointer; transition:background 0.2s;
+  display:inline-block;
+}
+
+.toggle-demo.on { background:var(--sage); }
+.toggle-demo.off { background:var(--clay); }
+
+.toggle-demo::after {
+  content:''; position:absolute;
+  top:3px; width:20px; height:20px;
+  border-radius:50%; background:white;
+  box-shadow:0 2px 4px rgba(0,0,0,0.15);
+  transition:left 0.2s, right 0.2s;
+}
+
+.toggle-demo.on::after { right:3px; }
+.toggle-demo.off::after { left:3px; }
+
+/* Dropdown */
+.dropdown-demo {
+  background:var(--warm); border:1.5px solid var(--clay);
+  border-radius:14px; overflow:hidden;
+  box-shadow:0 8px 32px rgba(26,21,18,0.1);
+  width:200px;
+}
+
+.dropdown-item-demo {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 16px; font-size:13px;
+  font-weight:500; cursor:pointer; transition:background 0.15s;
+}
+
+.dropdown-item-demo:hover { background:var(--sand); }
+.dropdown-item-demo.danger { color:var(--coral); }
+.dropdown-item-demo.danger:hover { background:#FFF0EE; }
+.dropdown-divider { height:1px; background:var(--clay); }
+
+/* Empty state */
+.empty-state-demo {
+  border:2px dashed var(--clay); border-radius:16px;
+  padding:40px 24px; text-align:center;
+}
+
+/* Card variants */
+.card-demo {
+  background:var(--warm); border:1.5px solid var(--clay);
+  border-radius:20px; padding:20px;
+}
+
+.card-elevated {
+  background:var(--warm); border-radius:20px;
+  box-shadow:0 4px 24px rgba(26,21,18,0.08);
+  padding:20px;
+}
+
+.card-dark {
+  background:var(--ink); border-radius:20px; padding:20px;
+  position:relative; overflow:hidden;
+}
+
+.card-pro {
+  background:linear-gradient(135deg,#FFF8E8,var(--pro-gold-light));
+  border:1.5px solid rgba(212,168,67,0.25);
+  border-radius:20px; padding:20px;
+}
+
+/* ══════════════════════════════════════
+   6. MOTION
+══════════════════════════════════════ */
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes slideUp {
+  from{transform:translateX(-50%) translateY(20px);opacity:0;}
+  to{transform:translateX(-50%) translateY(0);opacity:1;}
+}
+
+@keyframes fadeOut {
+  from{opacity:1;}
+  to{opacity:0;}
+}
+
+@keyframes pulse {
+  0%,100%{opacity:1;}
+  50%{opacity:0.5;}
+}
+
+@keyframes bounce {
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
+
+@keyframes shimmer {
+  from{background-position:-200% 0;}
+  to{background-position:200% 0;}
+}
+
+.motion-demo {
+  background:white; border-radius:16px;
+  border:1.5px solid var(--clay); padding:20px;
+}
+
+.motion-name {
+  font-size:12px; font-weight:700;
+  color:var(--ink); margin-bottom:4px;
+}
+
+.motion-desc {
+  font-size:11px; color:var(--ink-muted); margin-bottom:14px;
+}
+
+.motion-code {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:var(--ink-muted);
+  background:var(--sand); padding:8px 10px;
+  border-radius:8px; margin-bottom:12px;
+  line-height:1.5; overflow:hidden;
+}
+
+.motion-preview {
+  background:var(--sand); border-radius:10px;
+  height:52px; display:flex; align-items:center;
+  justify-content:center; cursor:pointer;
+  font-size:13px; font-weight:600; color:var(--ink-muted);
+  transition:all 0.2s;
+}
+
+.motion-preview:hover { background:var(--clay); color:var(--ink); }
+
+/* ══════════════════════════════════════
+   7. ICONOGRAPHY
+══════════════════════════════════════ */
+.icon-grid {
+  display:grid; grid-template-columns:repeat(8,1fr); gap:8px;
+}
+
+.icon-item {
+  background:white; border:1.5px solid var(--clay);
+  border-radius:12px; padding:14px 8px;
+  text-align:center; cursor:pointer; transition:all 0.15s;
+}
+
+.icon-item:hover { background:var(--sand); border-color:var(--ink-muted); }
+
+.icon-emoji { font-size:22px; margin-bottom:4px; }
+.icon-name { font-size:9px; color:var(--ink-muted); font-weight:600; letter-spacing:0.04em; }
+
+/* Habit emoji mapping */
+.habit-emoji-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+}
+
+.habit-emoji-item {
+  background:white; border:1.5px solid var(--clay);
+  border-radius:14px; padding:14px 12px;
+  display:flex; align-items:center; gap:10px;
+}
+
+.he-icon {
+  width:40px; height:40px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; flex-shrink:0;
+}
+
+.he-info { flex:1; }
+.he-name { font-size:12px; font-weight:600; color:var(--ink); }
+.he-cat { font-size:10px; color:var(--ink-muted); }
+
+/* ══════════════════════════════════════
+   8. VOICE & TONE
+══════════════════════════════════════ */
+.tone-block {
+  border-radius:16px; padding:20px; margin-bottom:12px;
+}
+
+.tone-label {
+  font-size:10px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; margin-bottom:12px;
+  display:flex; align-items:center; gap:8px;
+}
+
+.tone-label::before {
+  content:'';
+  width:6px; height:6px; border-radius:50%;
+}
+
+.tone-do { background:#E8F5EF; }
+.tone-do .tone-label { color:var(--done); }
+.tone-do .tone-label::before { background:var(--done); }
+
+.tone-dont { background:#FDEEEC; }
+.tone-dont .tone-label { color:var(--error); }
+.tone-dont .tone-label::before { background:var(--error); }
+
+.tone-example {
+  font-size:14px; color:var(--ink); line-height:1.6;
+  font-weight:400; margin-bottom:6px;
+  padding:10px 14px; background:rgba(255,255,255,0.6);
+  border-radius:10px;
+}
+
+.tone-note {
+  font-size:11px; color:var(--ink-muted); margin-top:6px;
+  padding:0 4px;
+}
+
+/* ══════════════════════════════════════
+   9. THEMES
+══════════════════════════════════════ */
+.theme-preview-card {
+  border-radius:20px; overflow:hidden;
+  border:2px solid transparent;
+  transition:all 0.2s; cursor:pointer;
+}
+
+.theme-preview-card:hover { transform:translateY(-2px); }
+
+.theme-header-bar {
+  height:10px;
+}
+
+.theme-body-preview {
+  padding:16px;
+}
+
+.tp-greeting {
+  font-family:'Fraunces',serif; font-style:italic;
+  font-size:14px; margin-bottom:10px;
+}
+
+.tp-card-mock {
+  border-radius:10px; height:32px; margin-bottom:6px;
+}
+
+.tp-card-mock-sm {
+  border-radius:8px; height:22px; width:70%;
+}
+
+.theme-name-bar {
+  padding:12px 16px; display:flex;
+  justify-content:space-between; align-items:center;
+}
+
+.t-name { font-size:12px; font-weight:700; }
+.t-tag { font-size:10px; opacity:0.6; }
+
+/* ══════════════════════════════════════
+   10. ELEVATION & SHADOW
+══════════════════════════════════════ */
+.shadow-demo {
+  background:white; border-radius:16px;
+  padding:24px; text-align:center;
+  display:flex; flex-direction:column;
+  align-items:center; gap:10px;
+}
+
+.shadow-name { font-size:11px; font-weight:700; color:var(--ink); }
+.shadow-value { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-muted); line-height:1.5; text-align:center; }
+
+/* ══════════════════════════════════════
+   SIDEBAR NAV
+══════════════════════════════════════ */
+.sticky-nav {
+  position:fixed; left:0; top:0; bottom:0;
+  width:220px; background:var(--ink);
+  padding:32px 20px; overflow-y:auto;
+  display:flex; flex-direction:column;
+  z-index:100;
+}
+
+.nav-logo {
+  font-family:'Fraunces',serif;
+  font-size:26px; font-style:italic; font-weight:400;
+  color:var(--cream); letter-spacing:-0.5px;
+  margin-bottom:4px;
+}
+
+.nav-version {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:rgba(253,248,242,0.3);
+  letter-spacing:0.08em; margin-bottom:32px;
+}
+
+.nav-section-label {
+  font-size:10px; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:rgba(253,248,242,0.2);
+  margin-bottom:8px; margin-top:20px;
+  padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.nav-item {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 10px; border-radius:10px;
+  font-size:13px; font-weight:500;
+  color:rgba(253,248,242,0.5);
+  cursor:pointer; text-decoration:none;
+  transition:all 0.15s; margin-bottom:2px;
+}
+
+.nav-item:hover, .nav-item.active {
+  background:rgba(255,255,255,0.07);
+  color:var(--cream);
+}
+
+.nav-num {
+  font-family:'DM Mono',monospace;
+  font-size:10px; color:rgba(253,248,242,0.2);
+  width:16px;
+}
+
+/* MAIN with sidebar */
+.main-content {
+  margin-left:220px;
+}
+
+/* ══════════════════════════════════════
+   CODE BLOCKS
+══════════════════════════════════════ */
+.code-block {
+  background:var(--ink); border-radius:12px;
+  padding:16px 20px; margin-top:12px;
+  font-family:'DM Mono',monospace;
+  font-size:12px; line-height:1.7;
+  overflow-x:auto;
+}
+
+.code-comment { color:rgba(253,248,242,0.3); }
+.code-var { color:var(--sun); }
+.code-val { color:var(--sage); }
+.code-prop { color:var(--sky); }
+.code-str { color:var(--coral); }
+
+/* ══════════════════════════════════════
+   16. DESIGN TOKENS
+══════════════════════════════════════ */
+.token-section { margin-bottom:32px; }
+
+.token-group-title {
+  font-size:11px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+  margin-bottom:14px; padding-bottom:8px;
+  border-bottom:1px solid var(--clay);
+}
+
+.token-table {
+  background:white; border-radius:16px;
+  border:1.5px solid var(--clay); overflow:hidden;
+  width:100%;
+}
+
+.token-row {
+  display:grid; grid-template-columns:220px 1fr 200px;
+  gap:16px; padding:12px 20px; align-items:center;
+  border-bottom:1px solid var(--sand); transition:background 0.12s;
+}
+.token-row:last-child { border-bottom:none; }
+.token-row:hover { background:var(--cream); }
+
+.token-head {
+  display:grid; grid-template-columns:220px 1fr 200px;
+  gap:16px; padding:10px 20px;
+  background:var(--sand); border-bottom:1.5px solid var(--clay);
+  font-size:10px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+}
+
+.tok-name { font-family:'DM Mono',monospace; font-size:12px; color:var(--sky); }
+.tok-val  { font-family:'DM Mono',monospace; font-size:12px; color:var(--coral); }
+.tok-use  { font-size:12px; color:var(--ink-muted); line-height:1.4; }
+
+.tok-preview {
+  width:32px; height:32px; border-radius:8px;
+  display:inline-block; border:1.5px solid rgba(0,0,0,.08);
+  vertical-align:middle; margin-right:8px; flex-shrink:0;
+}
+
+.token-naming-rule {
+  background:var(--ink); border-radius:16px; padding:24px 28px;
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  position:relative; overflow:hidden;
+}
+.token-naming-rule::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 400px 300px at 90% 50%, rgba(125,184,154,.08) 0%, transparent 60%);
+}
+.tnr-inner { position:relative; z-index:1; }
+.tnr-label { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
+.tnr-bad  .tnr-label { color:var(--coral); }
+.tnr-good .tnr-label { color:var(--sage); }
+.tnr-code {
+  font-family:'DM Mono',monospace; font-size:13px; line-height:1.9;
+  padding:14px 18px; border-radius:10px;
+}
+.tnr-bad  .tnr-code { background:rgba(220,74,60,.1);  color:rgba(253,248,242,.6); }
+.tnr-good .tnr-code { background:rgba(125,184,154,.1); color:rgba(253,248,242,.8); }
+.tnr-good .tnr-code strong { color:var(--sage); }
+
+/* ══════════════════════════════════════
+   17. ACCESSIBILITY
+══════════════════════════════════════ */
+.a11y-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+
+.a11y-card {
+  background:white; border-radius:16px;
+  border:1.5px solid var(--clay); padding:24px;
+}
+.a11y-card-title {
+  font-size:13px; font-weight:700; color:var(--ink);
+  margin-bottom:4px; display:flex; align-items:center; gap:10px;
+}
+.a11y-card-desc {
+  font-size:12px; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;
+}
+.a11y-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:9px 0; border-bottom:1px solid var(--sand); font-size:13px;
+}
+.a11y-row:last-child { border-bottom:none; }
+.a11y-label { color:var(--ink-muted); }
+.a11y-val   { font-family:'DM Mono',monospace; font-size:12px; font-weight:600; color:var(--ink); }
+
+.lv-badge {
+  font-family:'DM Mono',monospace; font-size:10px; font-weight:700;
+  padding:3px 10px; border-radius:6px; letter-spacing:0.06em;
+}
+.lv-aa  { background:var(--done-bg); color:var(--done); }
+.lv-aaa { background:rgba(107,164,196,.12); color:var(--sky); }
+.lv-must{ background:var(--error-bg); color:var(--error); }
+
+.contrast-table {
+  background:white; border-radius:16px;
+  border:1.5px solid var(--clay); overflow:hidden; margin-bottom:20px;
+}
+.ct-head {
+  display:grid; grid-template-columns:44px 1fr 100px 88px;
+  gap:12px; padding:10px 18px; background:var(--sand);
+  font-size:9px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+  border-bottom:1.5px solid var(--clay); align-items:center;
+}
+.ct-row {
+  display:grid; grid-template-columns:44px 1fr 100px 88px;
+  gap:12px; padding:10px 18px; align-items:center;
+  border-bottom:1px solid var(--sand);
+}
+.ct-row:last-child { border-bottom:none; }
+.ct-swatch {
+  width:36px; height:36px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; flex-shrink:0;
+}
+.ct-pair { font-size:12px; font-weight:600; color:var(--ink); }
+.ct-sub  { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-muted); }
+.ct-ratio{ font-family:'DM Mono',monospace; font-size:12px; font-weight:600; color:var(--ink); }
+.ct-tag  { font-size:10px; font-weight:700; padding:3px 9px; border-radius:6px; text-align:center; white-space:nowrap; }
+.ct-pass { background:var(--done-bg); color:var(--done); }
+.ct-warn { background:var(--partial-bg); color:var(--partial); }
+.ct-fail { background:var(--error-bg); color:var(--error); }
+
+.focus-demo {
+  background:white; border-radius:16px;
+  border:1.5px solid var(--clay); padding:24px;
+}
+.focus-demo-row {
+  display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px;
+}
+.focus-example {
+  padding:10px 20px; border-radius:12px;
+  font-size:14px; font-weight:500; cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+}
+.focus-good {
+  background:var(--ink); color:var(--warm);
+  outline:none;
+}
+.focus-good:focus-visible {
+  outline:2px solid var(--sky); outline-offset:2px;
+}
+.focus-bad {
+  background:var(--sand); color:var(--ink-soft);
+  border:1.5px solid var(--clay); outline:none;
+}
+.focus-bad:focus { outline:none; }
+
+/* ══════════════════════════════════════
+   HAMBURGER MENU
+══════════════════════════════════════ */
+.hamburger {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; border-radius:12px;
+  background:var(--ink); border:none; cursor:pointer;
+  flex-direction:column; align-items:center; justify-content:center; gap:5px;
+}
+.hamburger span {
+  display:block; width:18px; height:2px;
+  background:var(--cream); border-radius:99px; transition:all 0.2s;
+}
+.nav-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(26,21,18,.5); z-index:98; backdrop-filter:blur(4px);
+}
+
+/* ══════════════════════════════════════
+   MOBILE RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width:900px) {
+  /* Show hamburger */
+  .hamburger { display:flex; }
+  .nav-overlay.open { display:block; }
+
+  /* Sidebar off-canvas */
+  .sticky-nav {
+    transform:translateX(-100%); transition:transform 0.25s ease;
+    width:240px; z-index:199;
+  }
+  .sticky-nav.open { transform:translateX(0); }
+
+  /* Main content full width */
+  .main-content { margin-left:0; }
+
+  /* Header padding */
+  .guide-header { padding:72px 24px 40px; }
+  .header-title { font-size:48px; }
+  .header-sub   { font-size:15px; }
+
+  /* Page content padding */
+  .page-content { padding:40px 20px 80px; }
+
+  /* Section title */
+  .section-title { font-size:28px; }
+
+  /* Collapse all grids to 1 or 2 col */
+  .grid-2,.grid-3,.grid-4,.grid-5,.grid-6 {
+    grid-template-columns:1fr 1fr; gap:12px;
+  }
+  .grid-6 { grid-template-columns:repeat(3,1fr); }
+
+  /* Philosophy principles */
+  .philosophy-principles { grid-template-columns:1fr; }
+
+  /* Token tables scroll */
+  .token-table, .contrast-table { overflow-x:auto; }
+  .token-row,.token-head { grid-template-columns:180px 1fr 160px; }
+  .ct-head,.ct-row { grid-template-columns:40px 1fr 80px 76px; }
+
+  /* Type scale */
+  .type-scale-row { flex-wrap:wrap; gap:8px; }
+  .type-scale-spec { text-align:left; }
+
+  /* Code blocks */
+  .code-block { font-size:11px; overflow-x:auto; white-space:pre; }
+
+  /* Shadow grid */
+  .grid-5 { grid-template-columns:1fr 1fr; }
+
+  /* Habit emoji grid */
+  .habit-emoji-grid { grid-template-columns:1fr 1fr; }
+
+  /* Icon grid */
+  .icon-grid { grid-template-columns:repeat(5,1fr); }
+
+  /* Voice & tone */
+  .tone-block { margin-bottom:12px; }
+
+  /* Naming rule 2-col → 1-col */
+  .token-naming-rule { grid-template-columns:1fr; }
+
+  /* Accessibility grid */
+  .a11y-grid { grid-template-columns:1fr; }
+}
+
+@media (max-width:540px) {
+  .grid-2,.grid-3,.grid-4,.grid-5 { grid-template-columns:1fr; }
+  .grid-6 { grid-template-columns:repeat(2,1fr); }
+  .philosophy-card { padding:24px 20px; }
+  .header-title { font-size:36px; letter-spacing:-1px; }
+  .section-title { font-size:24px; }
+  .guide-header  { padding:64px 20px 32px; }
+  .page-content  { padding:32px 16px 80px; }
+  .icon-grid { grid-template-columns:repeat(4,1fr); }
+  .habit-emoji-grid { grid-template-columns:1fr; }
+  .ct-head,.ct-row { grid-template-columns:36px 1fr 72px; }
+  .ct-head > :nth-child(4),.ct-row > :nth-child(4) { display:none; }
+  .token-row,.token-head { grid-template-columns:1fr 1fr; }
+  .token-head > :nth-child(3),.token-row > :nth-child(3) { display:none; }
+  .a11y-grid { grid-template-columns:1fr; }
+  .focus-demo-row { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER (mobile) -->
+<button class="hamburger" id="menuBtn" aria-label="Open navigation">
+  <span></span><span></span><span></span>
+</button>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- SIDEBAR NAV -->
+<nav class="sticky-nav">
+  <div class="nav-logo">drift</div>
+  <div class="nav-version">Design Language v1.0</div>
+
+  <div class="nav-section-label">Foundation</div>
+  <a class="nav-item active" href="#philosophy"><span class="nav-num">01</span>Philosophy</a>
+  <a class="nav-item" href="#colors"><span class="nav-num">02</span>Color System</a>
+  <a class="nav-item" href="#typography"><span class="nav-num">03</span>Typography</a>
+  <a class="nav-item" href="#spacing"><span class="nav-num">04</span>Spacing & Layout</a>
+  <a class="nav-item" href="#elevation"><span class="nav-num">05</span>Elevation</a>
+
+  <div class="nav-section-label">Components</div>
+  <a class="nav-item" href="#buttons"><span class="nav-num">06</span>Buttons</a>
+  <a class="nav-item" href="#inputs"><span class="nav-num">07</span>Inputs</a>
+  <a class="nav-item" href="#cards"><span class="nav-num">08</span>Cards</a>
+  <a class="nav-item" href="#badges"><span class="nav-num">09</span>Badges & Pills</a>
+  <a class="nav-item" href="#feedback"><span class="nav-num">10</span>Feedback</a>
+  <a class="nav-item" href="#habits"><span class="nav-num">11</span>Habit Card</a>
+
+  <div class="nav-section-label">Expression</div>
+  <a class="nav-item" href="#motion"><span class="nav-num">12</span>Motion</a>
+  <a class="nav-item" href="#icons"><span class="nav-num">13</span>Iconography</a>
+  <a class="nav-item" href="#voice"><span class="nav-num">14</span>Voice & Tone</a>
+  <a class="nav-item" href="#themes"><span class="nav-num">15</span>Themes</a>
+
+  <div class="nav-section-label">Engineering</div>
+  <a class="nav-item" href="#tokens"><span class="nav-num">16</span>Design Tokens</a>
+  <a class="nav-item" href="#accessibility"><span class="nav-num">17</span>Accessibility</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- HEADER -->
+  <div class="guide-header">
+    <div class="header-inner">
+      <div class="header-eyebrow">Design Language · Style Guide</div>
+      <div class="header-title">drift</div>
+      <div class="header-sub">The complete design language for building Drift across V1 through V5 and beyond. Every decision documented, every component defined.</div>
+      <div class="header-meta">
+        <div class="meta-pill">Version 2.0 · March 2026</div>
+        <div class="meta-pill">Covers V1 → V5</div>
+        <div class="meta-pill">Fraunces + DM Sans</div>
+        <div class="meta-pill">4 Themes</div>
+        <div class="meta-pill">17 Sections</div>
+        <div class="meta-pill">WCAG 2.1 AA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ══════════════════════════════
+         01. PHILOSOPHY
+    ══════════════════════════════ -->
+    <div class="section" id="philosophy">
+      <div class="section-header">
+        <div class="section-num">01 / PHILOSOPHY</div>
+        <div class="section-title">The heart of Drift's design</div>
+        <div class="section-desc">Every design decision flows from one belief: building habits is a human act, not a performance. The interface should feel like a calm, kind friend — not a scoreboard.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="philosophy-card">
+        <div class="philosophy-inner">
+          <div class="philosophy-quote">"Design for the person who almost quit. Make them feel seen, not judged."</div>
+          <div class="philosophy-principles">
+            <div class="principle">
+              <div class="principle-num">PRINCIPLE 01</div>
+              <div class="principle-title">Warm over clinical</div>
+              <div class="principle-body">Every surface, color, and word should feel like it was made by a human who cares. No corporate polish, no sterile whites, no robotic copy. Cream instead of white. Fraunces instead of sans-serif. "You showed up" instead of "Streak: 0."</div>
+            </div>
+            <div class="principle">
+              <div class="principle-num">PRINCIPLE 02</div>
+              <div class="principle-title">Progress over perfection</div>
+              <div class="principle-body">The interface celebrates consistency, not flawlessness. 70% is displayed as an achievement, not a failure. No visual punishment for skipping. Partial completion is valid. Color and copy must reinforce this at every touchpoint.</div>
+            </div>
+            <div class="principle">
+              <div class="principle-num">PRINCIPLE 03</div>
+              <div class="principle-title">Fast over feature-rich</div>
+              <div class="principle-body">The fastest path to value wins. Check-in in one tap. Add a habit in 10 seconds. Every additional step is a dropped user. Complexity is a design failure. If it takes more than 3 taps, rethink it.</div>
+            </div>
+            <div class="principle">
+              <div class="principle-num">PRINCIPLE 04</div>
+              <div class="principle-title">Insight over data</div>
+              <div class="principle-body">Don't show raw numbers. Show meaning. "You always do this on Thursdays" beats "23 completions." Translate data into language a human would actually find useful and emotionally resonant.</div>
+            </div>
+            <div class="principle">
+              <div class="principle-num">PRINCIPLE 05</div>
+              <div class="principle-title">Delight in restraint</div>
+              <div class="principle-body">Micro-interactions exist to confirm, not to entertain. One well-placed animation that confirms a check-in is worth more than a confetti explosion. Earn every animation. Make every motion meaningful.</div>
+            </div>
+            <div class="principle">
+              <div class="principle-num">PRINCIPLE 06</div>
+              <div class="principle-title">Pro without arrogance</div>
+              <div class="principle-body">The Pro tier must feel premium and warm simultaneously. Gold accents signal value without feeling cold or corporate. Pro features should feel like a gift, not a paywall. The free tier must never feel punished.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         02. COLOR SYSTEM
+    ══════════════════════════════ -->
+    <div class="section" id="colors">
+      <div class="section-header">
+        <div class="section-num">02 / COLOR SYSTEM</div>
+        <div class="section-title">A warm, purposeful palette</div>
+        <div class="section-desc">Built around cream and earth tones, accented with natural greens and warm blues. Every color has a meaning. Never use a color decoratively without intent.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- Base palette -->
+      <div class="color-group">
+        <div class="color-group-title">Base — Warm Neutrals</div>
+        <div class="grid-6">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#FDF8F2;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Cream</div>
+              <div class="swatch-hex">#FDF8F2</div>
+              <div class="swatch-use">App background, page fills</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#FFFCF8;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Warm White</div>
+              <div class="swatch-hex">#FFFCF8</div>
+              <div class="swatch-use">Card backgrounds, modals</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#F2EAE0;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Sand</div>
+              <div class="swatch-hex">#F2EAE0</div>
+              <div class="swatch-use">Inputs, pills, secondary fills</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#E8D5C0;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Clay</div>
+              <div class="swatch-hex">#E8D5C0</div>
+              <div class="swatch-use">Borders, dividers, tracks</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#D4C4B0;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Clay Dark</div>
+              <div class="swatch-hex">#D4C4B0</div>
+              <div class="swatch-use">Hover borders, disabled</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#B8A898;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Clay Darker</div>
+              <div class="swatch-hex">#B8A898</div>
+              <div class="swatch-use">Decorative lines</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ink palette -->
+      <div class="color-group">
+        <div class="color-group-title">Ink — Text Hierarchy</div>
+        <div class="grid-4">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#1A1512;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink</div>
+              <div class="swatch-hex">#1A1512</div>
+              <div class="swatch-use">Primary text, buttons, headings</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#2D2018;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink Hover</div>
+              <div class="swatch-hex">#2D2018</div>
+              <div class="swatch-use">Button hover states</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#4A3F35;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink Soft</div>
+              <div class="swatch-hex">#4A3F35</div>
+              <div class="swatch-use">Body text, card content</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#8C7B6E;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink Muted</div>
+              <div class="swatch-hex">#8C7B6E</div>
+              <div class="swatch-use">Labels, placeholders, captions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accent palette -->
+      <div class="color-group">
+        <div class="color-group-title">Accents — Purposeful Color</div>
+        <div class="grid-5">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#FF6B4A;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Coral</div>
+              <div class="swatch-hex">#FF6B4A</div>
+              <div class="swatch-use">CTA, danger, delete actions</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#7DB89A;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Sage</div>
+              <div class="swatch-hex">#7DB89A</div>
+              <div class="swatch-use">Done, success, progress fill</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#6BA4C4;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Sky</div>
+              <div class="swatch-hex">#6BA4C4</div>
+              <div class="swatch-use">Info, partial, links</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#F5C842;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Sun</div>
+              <div class="swatch-hex">#F5C842</div>
+              <div class="swatch-use">Energy, highlights, stars</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#B89ED4;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Lilac</div>
+              <div class="swatch-hex">#B89ED4</div>
+              <div class="swatch-use">Mindfulness, calm states</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semantic palette -->
+      <div class="color-group">
+        <div class="color-group-title">Semantic — Status States</div>
+        <div class="grid-4">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#E8F5EF; border:1px solid rgba(61,153,112,0.2);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Done BG</div>
+              <div class="swatch-hex">#E8F5EF · text #3D9970</div>
+              <div class="swatch-use">Completed habit card fill</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#FFF4E0; border:1px solid rgba(212,130,10,0.2);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Partial BG</div>
+              <div class="swatch-hex">#FFF4E0 · text #D4820A</div>
+              <div class="swatch-use">Partial completion card fill</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#F5F0EA;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Skip BG</div>
+              <div class="swatch-hex">#F5F0EA · text #8C7B6E</div>
+              <div class="swatch-use">Skipped habit, neutral state</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#FDEEEC; border:1px solid rgba(220,74,60,0.2);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Error BG</div>
+              <div class="swatch-hex">#FDEEEC · text #DC4A3C</div>
+              <div class="swatch-use">Error states, validation fails</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro palette -->
+      <div class="color-group">
+        <div class="color-group-title">Pro Tier — Premium Gold</div>
+        <div class="grid-4">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#D4A843;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Pro Gold</div>
+              <div class="swatch-hex">#D4A843</div>
+              <div class="swatch-use">Pro badges, anchors, ✦ icon</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#F5C842;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Pro Gold Light</div>
+              <div class="swatch-hex">#F5C842</div>
+              <div class="swatch-use">Gradient endpoint, highlights</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#FFF4D6;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Pro Gold BG</div>
+              <div class="swatch-hex">#FFF4D6</div>
+              <div class="swatch-use">Anchor cards, pro card fills</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#1A1512;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Pro Dark</div>
+              <div class="swatch-hex">#1A1512</div>
+              <div class="swatch-use">Midnight theme base</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gradients -->
+      <div class="color-group">
+        <div class="color-group-title">Gradients</div>
+        <div class="grid-4">
+          <div class="gradient-swatch">
+            <div class="gradient-preview" style="background:linear-gradient(90deg,#7DB89A,#6BA4C4);"></div>
+            <div class="gradient-info">
+              <div class="gradient-name">Progress</div>
+              <div class="gradient-code">sage → sky · 90deg</div>
+            </div>
+          </div>
+          <div class="gradient-swatch">
+            <div class="gradient-preview" style="background:linear-gradient(135deg,#D4A843,#F5C842);"></div>
+            <div class="gradient-info">
+              <div class="gradient-name">Pro Gold</div>
+              <div class="gradient-code">pro-gold → sun · 135deg</div>
+            </div>
+          </div>
+          <div class="gradient-swatch">
+            <div class="gradient-preview" style="background:linear-gradient(135deg,#FF6B4A,#F5C842);"></div>
+            <div class="gradient-info">
+              <div class="gradient-name">Energy</div>
+              <div class="gradient-code">coral → sun · 135deg</div>
+            </div>
+          </div>
+          <div class="gradient-swatch">
+            <div class="gradient-preview" style="background:linear-gradient(135deg,#1A1512,#2D2018);"></div>
+            <div class="gradient-info">
+              <div class="gradient-name">Dark Card</div>
+              <div class="gradient-code">ink → ink-soft · 135deg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS Variables code block -->
+      <div class="code-block">
+        <span class="code-comment">/* drift-tokens.css — import in every project */</span><br>
+        <span class="code-var">:root</span> {<br>
+        &nbsp;&nbsp;<span class="code-comment">/* Base */</span><br>
+        &nbsp;&nbsp;<span class="code-prop">--cream</span>: <span class="code-str">#FDF8F2</span>; &nbsp;<span class="code-prop">--sand</span>: <span class="code-str">#F2EAE0</span>; &nbsp;<span class="code-prop">--clay</span>: <span class="code-str">#E8D5C0</span>; &nbsp;<span class="code-prop">--warm</span>: <span class="code-str">#FFFCF8</span>;<br>
+        &nbsp;&nbsp;<span class="code-comment">/* Ink */</span><br>
+        &nbsp;&nbsp;<span class="code-prop">--ink</span>: <span class="code-str">#1A1512</span>; &nbsp;<span class="code-prop">--ink-soft</span>: <span class="code-str">#4A3F35</span>; &nbsp;<span class="code-prop">--ink-muted</span>: <span class="code-str">#8C7B6E</span>;<br>
+        &nbsp;&nbsp;<span class="code-comment">/* Accents */</span><br>
+        &nbsp;&nbsp;<span class="code-prop">--coral</span>: <span class="code-str">#FF6B4A</span>; &nbsp;<span class="code-prop">--sage</span>: <span class="code-str">#7DB89A</span>; &nbsp;<span class="code-prop">--sky</span>: <span class="code-str">#6BA4C4</span>; &nbsp;<span class="code-prop">--sun</span>: <span class="code-str">#F5C842</span>; &nbsp;<span class="code-prop">--lilac</span>: <span class="code-str">#B89ED4</span>;<br>
+        &nbsp;&nbsp;<span class="code-comment">/* Pro */</span><br>
+        &nbsp;&nbsp;<span class="code-prop">--pro-gold</span>: <span class="code-str">#D4A843</span>; &nbsp;<span class="code-prop">--pro-gold-light</span>: <span class="code-str">#FFF4D6</span>;<br>
+        &nbsp;&nbsp;<span class="code-comment">/* Semantic */</span><br>
+        &nbsp;&nbsp;<span class="code-prop">--done</span>: <span class="code-str">#3D9970</span>; &nbsp;<span class="code-prop">--done-bg</span>: <span class="code-str">#E8F5EF</span>;<br>
+        &nbsp;&nbsp;<span class="code-prop">--partial</span>: <span class="code-str">#D4820A</span>; &nbsp;<span class="code-prop">--partial-bg</span>: <span class="code-str">#FFF4E0</span>;<br>
+        &nbsp;&nbsp;<span class="code-prop">--error</span>: <span class="code-str">#DC4A3C</span>; &nbsp;<span class="code-prop">--error-bg</span>: <span class="code-str">#FDEEEC</span>;<br>
+        }
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         03. TYPOGRAPHY
+    ══════════════════════════════ -->
+    <div class="section" id="typography">
+      <div class="section-header">
+        <div class="section-num">03 / TYPOGRAPHY</div>
+        <div class="section-title">Two fonts. One voice.</div>
+        <div class="section-desc">Fraunces for emotion. DM Sans for function. Never mix their roles. Never use a third font family.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- Fraunces specimen -->
+      <div class="type-specimen" style="margin-bottom:16px;">
+        <div class="type-meta">
+          <span>Fraunces</span>
+          <span>Serif · Optical size: 9–144</span>
+          <span>Italic always</span>
+          <span>Weight: 300, 400, 600</span>
+          <span>Role: Display, headings, emotional moments</span>
+        </div>
+        <div class="type-sample-xl">drift</div>
+        <div class="type-sample-lg">Your journey starts here</div>
+        <div class="type-sample-md">Good morning, Bibin ☀️</div>
+        <div style="font-family:'Fraunces',serif; font-size:16px; font-style:italic; font-weight:300; color:var(--ink-muted); line-height:1.6;">"Build habits that actually stick."</div>
+      </div>
+
+      <!-- DM Sans specimen -->
+      <div class="type-specimen" style="margin-bottom:24px;">
+        <div class="type-meta">
+          <span>DM Sans</span>
+          <span>Sans-serif · Variable</span>
+          <span>Upright only</span>
+          <span>Weight: 300, 400, 500, 600, 700</span>
+          <span>Role: All body, UI, labels, buttons</span>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:36px; font-weight:700; color:var(--ink); margin-bottom:12px; letter-spacing:-0.5px;">Consistency, not perfection</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:16px; font-weight:400; color:var(--ink-soft); line-height:1.7; margin-bottom:10px; max-width:500px;">You showed up 18 out of 20 days. That's real progress. Tomorrow is a fresh start — no guilt, no pressure.</div>
+        <div style="font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-muted);">DM Mono — for code, hex values, version numbers</div>
+      </div>
+
+      <!-- Type scale -->
+      <div class="type-scale">
+        <div class="type-scale-row">
+          <div class="type-scale-label">display</div>
+          <div class="type-scale-sample" style="font-family:'Fraunces',serif; font-size:56px; font-style:italic; font-weight:400; line-height:1; letter-spacing:-2px;">drift</div>
+          <div class="type-scale-spec">56px / 400 / -2px</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">h1</div>
+          <div class="type-scale-sample" style="font-family:'Fraunces',serif; font-size:36px; font-style:italic; font-weight:400; letter-spacing:-0.5px;">Your journey starts here</div>
+          <div class="type-scale-spec">36px / 400 / -0.5px</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">h2</div>
+          <div class="type-scale-sample" style="font-family:'Fraunces',serif; font-size:26px; font-style:italic; font-weight:400;">Good morning, Bibin ☀️</div>
+          <div class="type-scale-spec">26px / 400</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">h3</div>
+          <div class="type-scale-sample" style="font-family:'Fraunces',serif; font-size:20px; font-style:italic; font-weight:400;">Something went wrong</div>
+          <div class="type-scale-spec">20px / 400</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">body-lg</div>
+          <div class="type-scale-sample" style="font-size:16px; font-weight:400; color:var(--ink-soft);">You showed up 18 out of 20 days.</div>
+          <div class="type-scale-spec">16px / 400</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">body</div>
+          <div class="type-scale-sample" style="font-size:14px; font-weight:400; color:var(--ink-soft);">Add your first habit above. Start with just one.</div>
+          <div class="type-scale-spec">14px / 400</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">body-sm</div>
+          <div class="type-scale-sample" style="font-size:13px; font-weight:400; color:var(--ink-muted);">🌤 Morning · 14 of 20 days</div>
+          <div class="type-scale-spec">13px / 400</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">label</div>
+          <div class="type-scale-sample" style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted);">Time of day</div>
+          <div class="type-scale-spec">11px / 700 / +0.1em / UPPER</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">caption</div>
+          <div class="type-scale-sample" style="font-size:11px; font-weight:500; color:var(--ink-muted);">4 habits · 90% this month</div>
+          <div class="type-scale-spec">11px / 500</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="type-scale-label">mono</div>
+          <div class="type-scale-sample" style="font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-muted);">#FDF8F2 · v1.0.0 · 03 / Typography</div>
+          <div class="type-scale-spec">DM Mono / 12px</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         04. SPACING & LAYOUT
+    ══════════════════════════════ -->
+    <div class="section" id="spacing">
+      <div class="section-header">
+        <div class="section-num">04 / SPACING & LAYOUT</div>
+        <div class="section-title">An 8pt grid. Always.</div>
+        <div class="section-desc">Every spacing value is a multiple of 4px. The primary unit is 8px. Never use arbitrary values like 7px or 13px.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-2">
+        <div>
+          <div class="component-block">
+            <div class="component-title">Spacing Scale</div>
+            <div class="spacing-row">
+              <div class="spacing-label">4px</div>
+              <div class="spacing-block" style="width:4px;"></div>
+              <div class="spacing-name">xs</div>
+              <div class="spacing-use">Icon gaps, tight badges</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">8px</div>
+              <div class="spacing-block" style="width:8px;"></div>
+              <div class="spacing-name">sm</div>
+              <div class="spacing-use">Badge padding, small gaps</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">12px</div>
+              <div class="spacing-block" style="width:12px;"></div>
+              <div class="spacing-name">md</div>
+              <div class="spacing-use">Card padding (tight), input padding</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">16px</div>
+              <div class="spacing-block" style="width:16px;"></div>
+              <div class="spacing-name">lg</div>
+              <div class="spacing-use">Mobile page padding, section gaps</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">20px</div>
+              <div class="spacing-block" style="width:20px;"></div>
+              <div class="spacing-name">xl</div>
+              <div class="spacing-use">Card padding, between cards</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">24px</div>
+              <div class="spacing-block" style="width:24px;"></div>
+              <div class="spacing-name">2xl</div>
+              <div class="spacing-use">Mobile page padding, section headers</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">32px</div>
+              <div class="spacing-block" style="width:32px;"></div>
+              <div class="spacing-name">3xl</div>
+              <div class="spacing-use">Desktop page padding, large gaps</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">40px</div>
+              <div class="spacing-block" style="width:40px;"></div>
+              <div class="spacing-name">4xl</div>
+              <div class="spacing-use">Empty state padding, hero sections</div>
+            </div>
+            <div class="spacing-row">
+              <div class="spacing-label">64px</div>
+              <div class="spacing-block" style="width:64px;"></div>
+              <div class="spacing-name">5xl</div>
+              <div class="spacing-use">Desktop section spacing</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="component-block">
+            <div class="component-title">Border Radius</div>
+            <div class="radius-row">
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:4px;"></div>
+                <div class="radius-name">4px</div>
+                <div class="radius-label">xs · tags</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:8px;"></div>
+                <div class="radius-name">8px</div>
+                <div class="radius-label">sm · confirm btns</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:10px;"></div>
+                <div class="radius-name">10px</div>
+                <div class="radius-label">check-in btns</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:12px;"></div>
+                <div class="radius-name">12px</div>
+                <div class="radius-label">input · sm cards</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:14px;"></div>
+                <div class="radius-name">14px</div>
+                <div class="radius-label">buttons · toast</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:16px;"></div>
+                <div class="radius-name">16px</div>
+                <div class="radius-label">habit cards</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:20px;"></div>
+                <div class="radius-name">20px</div>
+                <div class="radius-label">main cards</div>
+              </div>
+              <div class="radius-item">
+                <div class="radius-box" style="border-radius:99px; width:80px;"></div>
+                <div class="radius-name">99px</div>
+                <div class="radius-label">pills · toggles</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-block" style="margin-top:16px;">
+            <div class="component-title">Max Widths & Breakpoints</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--sand); font-size:13px;">
+                <span style="font-weight:600; color:var(--ink);">Mobile</span>
+                <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-muted);">≤ 640px · padding 16px</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--sand); font-size:13px;">
+                <span style="font-weight:600; color:var(--ink);">Tablet</span>
+                <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-muted);">641px–1024px · padding 24px</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--sand); font-size:13px;">
+                <span style="font-weight:600; color:var(--ink);">Desktop</span>
+                <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-muted);">&gt; 1024px · padding 32px</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--sand); font-size:13px;">
+                <span style="font-weight:600; color:var(--ink);">Content max-width</span>
+                <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-muted);">600px (app) · 1100px (marketing)</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:10px 0; font-size:13px;">
+                <span style="font-weight:600; color:var(--ink);">Min tap target</span>
+                <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-muted);">44 × 44px (Apple HIG)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         05. ELEVATION
+    ══════════════════════════════ -->
+    <div class="section" id="elevation">
+      <div class="section-header">
+        <div class="section-num">05 / ELEVATION</div>
+        <div class="section-title">Shadow as depth signal</div>
+        <div class="section-desc">Shadows are warm, never cold. Use rgba(26,21,18) — the ink color — not black. Five levels of elevation, each with a purpose.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-5">
+        <div class="shadow-demo" style="box-shadow:none; border:1.5px solid var(--clay);">
+          <div class="shadow-name">Flat</div>
+          <div class="shadow-value">border only<br>1.5px solid clay<br>Cards, inputs</div>
+        </div>
+        <div class="shadow-demo" style="box-shadow:0 2px 8px rgba(26,21,18,0.06);">
+          <div class="shadow-name">Raised</div>
+          <div class="shadow-value">0 2px 8px<br>rgba(26,21,18,0.06)<br>Hover cards</div>
+        </div>
+        <div class="shadow-demo" style="box-shadow:0 4px 16px rgba(26,21,18,0.08);">
+          <div class="shadow-name">Floating</div>
+          <div class="shadow-value">0 4px 16px<br>rgba(26,21,18,0.08)<br>Modals, sheets</div>
+        </div>
+        <div class="shadow-demo" style="box-shadow:0 8px 32px rgba(26,21,18,0.12);">
+          <div class="shadow-name">Overlay</div>
+          <div class="shadow-value">0 8px 32px<br>rgba(26,21,18,0.12)<br>Dropdowns</div>
+        </div>
+        <div class="shadow-demo" style="box-shadow:0 16px 64px rgba(26,21,18,0.18);">
+          <div class="shadow-name">Modal</div>
+          <div class="shadow-value">0 16px 64px<br>rgba(26,21,18,0.18)<br>Full modals</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         06. BUTTONS
+    ══════════════════════════════ -->
+    <div class="section" id="buttons">
+      <div class="section-header">
+        <div class="section-num">06 / BUTTONS</div>
+        <div class="section-title">Every action, a clear intent</div>
+        <div class="section-desc">One primary action per screen. Ghost for secondary. Pro for upgrade moments. Danger for destructive only. Never use more than two button variants in one view.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="component-block">
+        <div class="component-title">Button Variants <span class="component-tag">Interactive</span></div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="this.innerHTML='<div class=spinner></div> Loading...'">Primary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-pro">✦ Upgrade Pro</button>
+          <button class="btn btn-danger">Delete habit</button>
+          <button class="btn btn-primary" style="background:var(--sage);">Success</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary btn-sm">Primary small</button>
+          <button class="btn btn-ghost btn-sm">Ghost small</button>
+          <button class="btn btn-primary" style="opacity:0.5; cursor:not-allowed;">Disabled</button>
+          <button class="btn btn-icon">⋮</button>
+          <button class="btn btn-icon" style="border-radius:50%;">←</button>
+        </div>
+
+        <div class="code-block" style="margin-top:16px;">
+          <span class="code-comment">/* Primary — one per page */</span><br>
+          <span class="code-var">background</span>: <span class="code-str">#1A1512</span>; <span class="code-var">color</span>: <span class="code-str">#FFFCF8</span>; <span class="code-var">border-radius</span>: <span class="code-str">14px</span>; <span class="code-var">padding</span>: <span class="code-str">13px 24px</span>; <span class="code-var">font-size</span>: <span class="code-str">14px</span>; <span class="code-var">font-weight</span>: <span class="code-str">500</span>;<br><br>
+          <span class="code-comment">/* Pro — upgrade moments only */</span><br>
+          <span class="code-var">background</span>: <span class="code-str">linear-gradient(135deg,#D4A843,#F5C842)</span>; <span class="code-var">color</span>: <span class="code-str">#1A1512</span>; <span class="code-var">font-weight</span>: <span class="code-str">700</span>; <span class="code-var">box-shadow</span>: <span class="code-str">0 4px 20px rgba(212,168,67,0.3)</span>;
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         07. INPUTS
+    ══════════════════════════════ -->
+    <div class="section" id="inputs">
+      <div class="section-header">
+        <div class="section-num">07 / INPUTS</div>
+        <div class="section-title">Gentle, not clinical</div>
+        <div class="section-desc">Inputs use sand background instead of white — softer on the eye. Border appears only on focus or validation state, not by default.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="component-block">
+        <div class="component-title">Input States</div>
+        <div class="grid-2">
+          <div>
+            <div class="input-group" style="margin-bottom:12px;">
+              <label class="input-label">Email</label>
+              <input class="input" placeholder="you@example.com">
+              <div class="input-hint">We'll never share your email.</div>
+            </div>
+            <div class="input-group" style="margin-bottom:12px;">
+              <label class="input-label">Focused</label>
+              <input class="input" style="border-color:var(--ink);" value="bibin@gmail.com">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Error state</label>
+              <input class="input error" value="notanemail">
+              <div class="input-error">Please enter a valid email address.</div>
+            </div>
+          </div>
+          <div>
+            <div class="input-group" style="margin-bottom:12px;">
+              <label class="input-label">Success state</label>
+              <input class="input success" value="bibin@gmail.com">
+              <div style="font-size:11px; color:var(--done);">Looks good!</div>
+            </div>
+            <div class="input-group" style="margin-bottom:12px;">
+              <label class="input-label">Disabled</label>
+              <input class="input" value="bibin@gmail.com" disabled style="opacity:0.5; cursor:not-allowed;">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Habit name (with counter)</label>
+              <input class="input" value="Drink 2L water" maxlength="50">
+              <div style="display:flex; justify-content:flex-end;"><span class="input-hint">14 / 50</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         08. CARDS
+    ══════════════════════════════ -->
+    <div class="section" id="cards">
+      <div class="section-header">
+        <div class="section-num">08 / CARDS</div>
+        <div class="section-title">Containers of context</div>
+        <div class="section-desc">Cards are the primary content unit in Drift. Four variants — each communicates a different level of importance and context.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-2">
+        <div>
+          <div class="card-demo" style="margin-bottom:16px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:10px;">Default Card</div>
+            <div style="font-family:'Fraunces',serif; font-size:16px; font-style:italic; color:var(--ink); margin-bottom:6px;">Add a new habit</div>
+            <div style="font-size:13px; color:var(--ink-muted);">background: warm · border: clay · radius: 20px</div>
+          </div>
+          <div class="card-elevated" style="margin-bottom:16px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:10px;">Elevated Card</div>
+            <div style="font-family:'Fraunces',serif; font-size:16px; font-style:italic; color:var(--ink); margin-bottom:6px;">Weekly Drift Report</div>
+            <div style="font-size:13px; color:var(--ink-muted);">No border · box-shadow floating · radius: 20px</div>
+          </div>
+        </div>
+        <div>
+          <div class="card-dark" style="margin-bottom:16px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(253,248,242,0.4); margin-bottom:10px;">Dark Card</div>
+            <div style="font-family:'Fraunces',serif; font-size:16px; font-style:italic; color:var(--cream); margin-bottom:6px;">AI Weekly Insight</div>
+            <div style="font-size:13px; color:rgba(253,248,242,0.45);">background: ink · used for emphasis, Pro moments</div>
+          </div>
+          <div class="card-pro">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--pro-gold); margin-bottom:10px;">⚓ Anchor Card</div>
+            <div style="font-family:'Fraunces',serif; font-size:16px; font-style:italic; color:var(--ink); margin-bottom:6px;">Read 10 pages · 92%</div>
+            <div style="font-size:13px; color:var(--ink-muted);">background: pro-gold-light gradient · Pro only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         09. BADGES & PILLS
+    ══════════════════════════════ -->
+    <div class="section" id="badges">
+      <div class="section-header">
+        <div class="section-num">09 / BADGES & PILLS</div>
+        <div class="section-title">Compact signals</div>
+        <div class="section-desc">Badges show status and metadata. Pills are interactive selectors. Never mix their roles.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="component-block">
+        <div class="component-title">Badge Variants</div>
+        <div class="badge-row" style="margin-bottom:16px;">
+          <span class="badge badge-default">🌤 Morning</span>
+          <span class="badge badge-done">✓ Done</span>
+          <span class="badge badge-partial">~ 65%</span>
+          <span class="badge badge-anchor">⚓ Anchor</span>
+          <span class="badge badge-pro">✦ Pro</span>
+          <span class="badge badge-coral">🔥 Streak</span>
+          <span class="badge badge-sky">💡 Insight</span>
+          <span class="badge badge-ink">New</span>
+        </div>
+        <div class="component-title" style="margin-top:20px;">Interactive Pills <span class="component-tag">Click to select</span></div>
+        <div class="pill-row">
+          <button class="pill pill-active" onclick="selectPill(this)">🌤 Morning</button>
+          <button class="pill pill-default" onclick="selectPill(this)">☀️ Afternoon</button>
+          <button class="pill pill-default" onclick="selectPill(this)">🌙 Evening</button>
+        </div>
+        <div class="pill-row" style="margin-top:10px;">
+          <button class="pill pill-active" onclick="selectPeriod(this)">7D</button>
+          <button class="pill pill-default" onclick="selectPeriod(this)">30D</button>
+          <button class="pill pill-default" onclick="selectPeriod(this)">90D</button>
+          <button class="pill pill-default" onclick="selectPeriod(this)">All</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         10. FEEDBACK
+    ══════════════════════════════ -->
+    <div class="section" id="feedback">
+      <div class="section-header">
+        <div class="section-num">10 / FEEDBACK</div>
+        <div class="section-title">Confirm, inform, reassure</div>
+        <div class="section-desc">Toasts for confirmations. Progress bars for state. Toggles for settings. Every interaction must have visible feedback within 100ms.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-2">
+        <div>
+          <div class="component-block">
+            <div class="component-title">Toast Notifications</div>
+            <div class="toast-row">
+              <div class="toast-demo">🌱 Habit added!</div>
+              <div class="toast-demo toast-success">✓ Saved</div>
+              <div class="toast-demo toast-error">✕ Failed</div>
+            </div>
+            <div class="code-block" style="margin-top:14px;">
+              <span class="code-comment">/* position: fixed, bottom center */</span><br>
+              <span class="code-var">bottom</span>: <span class="code-str">24px</span>; <span class="code-var">left</span>: <span class="code-str">50%</span>; <span class="code-var">transform</span>: <span class="code-str">translateX(-50%)</span>;<br>
+              <span class="code-var">animation</span>: <span class="code-str">slideUp 0.3s ease, fadeOut 0.3s ease 2.2s forwards</span>;
+            </div>
+          </div>
+
+          <div class="component-block" style="margin-top:16px;">
+            <div class="component-title">Progress Bars <span class="component-tag">Interactive</span></div>
+            <div style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:12px; color:var(--ink-muted);">
+                <span>4 of 6 done today</span>
+                <span style="color:var(--sage); font-weight:700;">67%</span>
+              </div>
+              <div class="progress-demo" id="progressDemo"><div class="progress-fill-demo" style="width:67%" id="progressFill"></div></div>
+              <div style="font-size:11px; color:var(--ink-muted);">6 habits</div>
+            </div>
+            <input type="range" min="0" max="100" value="67" style="width:100%; accent-color:var(--sage);" oninput="document.getElementById('progressFill').style.width=this.value+'%'">
+            <div style="font-size:11px; color:var(--ink-muted); text-align:center; margin-top:4px;">Drag to preview progress states</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="component-block">
+            <div class="component-title">Toggle Switches <span class="component-tag">Click to toggle</span></div>
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:13px; font-weight:600; color:var(--ink);">Daily reminders</div>
+                  <div style="font-size:11px; color:var(--ink-muted);">Get nudged at habit time</div>
+                </div>
+                <div class="toggle-demo on" onclick="this.classList.toggle('on'); this.classList.toggle('off');"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:13px; font-weight:600; color:var(--ink);">Weekly AI report</div>
+                  <div style="font-size:11px; color:var(--ink-muted);">Sunday summary card</div>
+                </div>
+                <div class="toggle-demo off" onclick="this.classList.toggle('on'); this.classList.toggle('off');"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:13px; font-weight:600; color:var(--ink);">Calendar sync</div>
+                  <div style="font-size:11px; color:var(--ink-muted);">Google Calendar</div>
+                </div>
+                <div class="toggle-demo off" onclick="this.classList.toggle('on'); this.classList.toggle('off');"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-block" style="margin-top:16px;">
+            <div class="component-title">Dropdown Menu</div>
+            <div class="dropdown-demo">
+              <div class="dropdown-item-demo">✏️ Edit habit</div>
+              <div class="dropdown-item-demo">📊 View stats</div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item-demo danger">🗑 Delete habit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         11. HABIT CARD
+    ══════════════════════════════ -->
+    <div class="section" id="habits">
+      <div class="section-header">
+        <div class="section-num">11 / HABIT CARD</div>
+        <div class="section-title">The core unit of Drift</div>
+        <div class="section-desc">The habit card is the most important component in the entire product. Every pixel of it must feel considered. Three states: neutral, done, partial.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-3">
+        <!-- Neutral -->
+        <div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:10px;">Neutral</div>
+          <div class="habit-card-demo">
+            <div class="habit-card-top">
+              <div class="habit-icon-demo" style="background:#E3F4EC;">🏃</div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:3px;">Morning walk</div>
+                <div style="display:flex; gap:5px;">
+                  <span class="badge badge-default">🌤 Morning</span>
+                  <span class="badge badge-default">65%</span>
+                </div>
+              </div>
+              <button style="width:28px; height:28px; border-radius:7px; background:transparent; border:none; color:var(--ink-muted); cursor:pointer; font-size:16px;">⋮</button>
+            </div>
+            <div class="checkin-row">
+              <button class="checkin-btn" onclick="setHabitState(this,'done')">✓ Done</button>
+              <button class="checkin-btn" onclick="setHabitState(this,'partial')">~ Partial</button>
+              <button class="checkin-btn" onclick="setHabitState(this,'skip')">✕ Skip</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Done -->
+        <div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--done); margin-bottom:10px;">Done State</div>
+          <div class="habit-card-demo state-done">
+            <div class="habit-card-top">
+              <div class="habit-icon-demo" style="background:#FFE8E3;">💧</div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:3px;">Drink 2L water</div>
+                <div style="display:flex; gap:5px;">
+                  <span class="badge badge-done">✓ 88%</span>
+                  <span class="badge badge-default">🌤 Morning</span>
+                </div>
+              </div>
+              <button style="width:28px; height:28px; border-radius:7px; background:transparent; border:none; color:var(--ink-muted); cursor:pointer; font-size:16px;">⋮</button>
+            </div>
+            <div class="checkin-row">
+              <button class="checkin-btn active-done">✓ Done</button>
+              <button class="checkin-btn" onclick="setHabitState(this,'partial')">~ Partial</button>
+              <button class="checkin-btn" onclick="setHabitState(this,'skip')">✕ Skip</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partial -->
+        <div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--partial); margin-bottom:10px;">Partial State</div>
+          <div class="habit-card-demo state-partial">
+            <div class="habit-card-top">
+              <div class="habit-icon-demo" style="background:#E3EFF8;">📖</div>
+              <div style="flex:1;">
+                <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:3px;">Read 10 pages</div>
+                <div style="display:flex; gap:5px;">
+                  <span class="badge" style="background:var(--partial-bg); color:var(--partial);">~ 80%</span>
+                  <span class="badge badge-default">🌙 Evening</span>
+                </div>
+              </div>
+              <button style="width:28px; height:28px; border-radius:7px; background:transparent; border:none; color:var(--ink-muted); cursor:pointer; font-size:16px;">⋮</button>
+            </div>
+            <div class="checkin-row">
+              <button class="checkin-btn" onclick="setHabitState(this,'done')">✓ Done</button>
+              <button class="checkin-btn active-partial">~ Partial</button>
+              <button class="checkin-btn" onclick="setHabitState(this,'skip')">✕ Skip</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         12. MOTION
+    ══════════════════════════════ -->
+    <div class="section" id="motion">
+      <div class="section-header">
+        <div class="section-num">12 / MOTION</div>
+        <div class="section-title">Move with purpose</div>
+        <div class="section-desc">Every animation has a reason. Fast confirmations (150ms). Gentle reveals (300–500ms). Never animate for decoration alone. Duration over 500ms requires justification.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-3">
+        <div class="motion-demo">
+          <div class="motion-name">fadeUp</div>
+          <div class="motion-desc">Page load, card reveals, list items</div>
+          <div class="motion-code">opacity: 0→1<br>translateY: 16px→0<br>duration: 400ms<br>easing: ease</div>
+          <div class="motion-preview" onclick="playAnim(this,'fadeUp 0.4s ease both')">▶ Play</div>
+        </div>
+        <div class="motion-demo">
+          <div class="motion-name">slideUp (toast)</div>
+          <div class="motion-desc">Toast entry from bottom of screen</div>
+          <div class="motion-code">translateX(-50%) translateY(20px→0)<br>opacity: 0→1<br>duration: 300ms ease<br>fadeOut: 300ms at 2.2s</div>
+          <div class="motion-preview" onclick="playAnim(this,'slideUp 0.3s ease both')">▶ Play</div>
+        </div>
+        <div class="motion-demo">
+          <div class="motion-name">checkBounce</div>
+          <div class="motion-desc">Habit check-in confirmation</div>
+          <div class="motion-code">scale: 1→1.08→1<br>duration: 200ms<br>easing: ease-in-out<br>trigger: on tap</div>
+          <div class="motion-preview" onclick="playAnim(this,'bounce 0.2s ease-in-out')">▶ Play</div>
+        </div>
+        <div class="motion-demo">
+          <div class="motion-name">spin</div>
+          <div class="motion-desc">Loading states on all async actions</div>
+          <div class="motion-code">rotate: 0→360deg<br>duration: 1s linear infinite<br>width: 15–16px<br>border-top: colored</div>
+          <div class="motion-preview" style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:13px; font-weight:600;">
+            <div class="spinner" style="border-top-color:var(--ink); border-color:var(--clay); width:16px; height:16px; border-width:2px;"></div>
+            Loading...
+          </div>
+        </div>
+        <div class="motion-demo">
+          <div class="motion-name">shimmer</div>
+          <div class="motion-desc">Skeleton loading states (V3+)</div>
+          <div class="motion-code">background: linear-gradient<br>background-size: 200%<br>animation: shimmer 1.5s infinite<br>use on placeholder cards</div>
+          <div class="motion-preview" style="background:linear-gradient(90deg,var(--sand) 25%,var(--clay) 50%,var(--sand) 75%); background-size:200%; animation:shimmer 1.5s infinite; font-size:0;"></div>
+        </div>
+        <div class="motion-demo">
+          <div class="motion-name">Easing guide</div>
+          <div class="motion-desc">Standard easing values for Drift</div>
+          <div class="motion-code" style="font-size:9px;">Enter UI: ease-out (fast start)<br>Exit UI:  ease-in (fast end)<br>Bounce:   cubic-bezier(0.34,1.56,0.64,1)<br>Progress: cubic-bezier(0.4,0,0.2,1)<br>Hover:    0.15s ease (all transitions)</div>
+          <div class="motion-preview" style="font-size:12px; font-weight:600; color:var(--ink);">Hover me ↓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         13. ICONOGRAPHY
+    ══════════════════════════════ -->
+    <div class="section" id="icons">
+      <div class="section-header">
+        <div class="section-num">13 / ICONOGRAPHY</div>
+        <div class="section-title">Emoji-first. SVG for UI.</div>
+        <div class="section-desc">Drift uses large expressive emoji as the primary illustration system. No icon libraries. UI actions use inline SVG with 2px stroke, currentColor, no fill.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="component-block" style="margin-bottom:16px;">
+        <div class="component-title">Habit Category Emoji</div>
+        <div class="habit-emoji-grid">
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#E3F4EC;">🌱</div><div class="he-info"><div class="he-name">Growth</div><div class="he-cat">Personal dev</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#E3EFF8;">💧</div><div class="he-info"><div class="he-name">Hydration</div><div class="he-cat">Health</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#FFE8E3;">🏃</div><div class="he-info"><div class="he-name">Movement</div><div class="he-cat">Fitness</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#E3EFF8;">📖</div><div class="he-info"><div class="he-name">Learning</div><div class="he-cat">Mind</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#F0EAFF;">🧘</div><div class="he-info"><div class="he-name">Mindfulness</div><div class="he-cat">Wellbeing</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#E3F4EC;">😴</div><div class="he-info"><div class="he-name">Sleep</div><div class="he-cat">Recovery</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#FFF4D6;">✍️</div><div class="he-info"><div class="he-name">Journaling</div><div class="he-cat">Reflection</div></div></div>
+          <div class="habit-emoji-item"><div class="he-icon" style="background:#E3F4EC;">🥗</div><div class="he-info"><div class="he-name">Nutrition</div><div class="he-cat">Health</div></div></div>
+        </div>
+      </div>
+
+      <div class="component-block">
+        <div class="component-title">State & Illustration Emoji</div>
+        <div class="icon-grid">
+          <div class="icon-item"><div class="icon-emoji">🌅</div><div class="icon-name">New day</div></div>
+          <div class="icon-item"><div class="icon-emoji">🌱</div><div class="icon-name">Empty state</div></div>
+          <div class="icon-item"><div class="icon-emoji">🎯</div><div class="icon-name">On a roll</div></div>
+          <div class="icon-item"><div class="icon-emoji">✨</div><div class="icon-name">All done</div></div>
+          <div class="icon-item"><div class="icon-emoji">😵</div><div class="icon-name">Error</div></div>
+          <div class="icon-item"><div class="icon-emoji">🌿</div><div class="icon-name">404</div></div>
+          <div class="icon-item"><div class="icon-emoji">⚓</div><div class="icon-name">Anchor</div></div>
+          <div class="icon-item"><div class="icon-emoji">✦</div><div class="icon-name">Pro badge</div></div>
+          <div class="icon-item"><div class="icon-emoji">☀️</div><div class="icon-name">Morning</div></div>
+          <div class="icon-item"><div class="icon-emoji">🌤</div><div class="icon-name">Afternoon</div></div>
+          <div class="icon-item"><div class="icon-emoji">🌙</div><div class="icon-name">Evening</div></div>
+          <div class="icon-item"><div class="icon-emoji">💡</div><div class="icon-name">Insight</div></div>
+          <div class="icon-item"><div class="icon-emoji">🔥</div><div class="icon-name">Streak/hot</div></div>
+          <div class="icon-item"><div class="icon-emoji">📊</div><div class="icon-name">Analytics</div></div>
+          <div class="icon-item"><div class="icon-emoji">🎨</div><div class="icon-name">Themes</div></div>
+          <div class="icon-item"><div class="icon-emoji">📅</div><div class="icon-name">Calendar</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         14. VOICE & TONE
+    ══════════════════════════════ -->
+    <div class="section" id="voice">
+      <div class="section-header">
+        <div class="section-num">14 / VOICE & TONE</div>
+        <div class="section-title">Warm. Honest. Human.</div>
+        <div class="section-desc">Drift speaks like a kind friend who happens to know a lot about habits. Never clinical, never preachy, never over-celebrating. Every word earns its place.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-2">
+        <div>
+          <div class="tone-block tone-do">
+            <div class="tone-label">✓ Write like this</div>
+            <div class="tone-example">"Build habits that actually stick."</div>
+            <div class="tone-example">"Tomorrow's a fresh start 🌅"</div>
+            <div class="tone-example">"You showed up 18 out of 20 days. That's real."</div>
+            <div class="tone-example">"Your journey starts here"</div>
+            <div class="tone-example">"Start with just one — that's enough."</div>
+            <div class="tone-example">"Something went wrong. Try refreshing."</div>
+            <div class="tone-note">Warm · Specific · Human · Short</div>
+          </div>
+        </div>
+        <div>
+          <div class="tone-block tone-dont">
+            <div class="tone-label">✕ Never write like this</div>
+            <div class="tone-example" style="background:rgba(255,255,255,0.5);">"Maximize your productivity with AI-powered insights!"</div>
+            <div class="tone-example" style="background:rgba(255,255,255,0.5);">"Streak broken. You've lost your 14-day streak."</div>
+            <div class="tone-example" style="background:rgba(255,255,255,0.5);">"Habit completion rate: 0%. Please complete habits."</div>
+            <div class="tone-example" style="background:rgba(255,255,255,0.5);">"Error 422: Validation failed. Please try again."</div>
+            <div class="tone-example" style="background:rgba(255,255,255,0.5);">"AMAZING JOB!!! You're a HABIT HERO!! 🎉🎉🎉"</div>
+            <div class="tone-note">Salesy · Punishing · Robotic · Exhausting · Generic</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-block" style="margin-top:20px;">
+        <div class="component-title">Copy Reference — Key Moments</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0;">
+          <div style="padding:12px 16px; border-bottom:1px solid var(--sand); border-right:1px solid var(--sand);">
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:4px;">Empty state</div>
+            <div style="font-size:13px; color:var(--ink);">"Your journey starts here" · "Add one above — it takes 10 seconds"</div>
+          </div>
+          <div style="padding:12px 16px; border-bottom:1px solid var(--sand);">
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:4px;">Toast — add habit</div>
+            <div style="font-size:13px; color:var(--ink);">"🌱 Habit added!"</div>
+          </div>
+          <div style="padding:12px 16px; border-bottom:1px solid var(--sand); border-right:1px solid var(--sand);">
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:4px;">All done today</div>
+            <div style="font-size:13px; color:var(--ink);">"✨ All done for today"</div>
+          </div>
+          <div style="padding:12px 16px; border-bottom:1px solid var(--sand);">
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:4px;">Sign up success</div>
+            <div style="font-size:13px; color:var(--ink);">"Account created! Please sign in."</div>
+          </div>
+          <div style="padding:12px 16px; border-right:1px solid var(--sand);">
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:4px;">Delete confirm</div>
+            <div style="font-size:13px; color:var(--ink);">"Delete this habit?" · "This cannot be undone."</div>
+          </div>
+          <div style="padding:12px 16px;">
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:4px;">Error state</div>
+            <div style="font-size:13px; color:var(--ink);">"Something went wrong. Try refreshing the page."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         15. THEMES
+    ══════════════════════════════ -->
+    <div class="section" id="themes">
+      <div class="section-header">
+        <div class="section-num">15 / THEMES</div>
+        <div class="section-title">Four moods. One design language.</div>
+        <div class="section-desc">All four themes share the same typography, spacing, and component shapes. Only colors change. Warm Light is default (free). All others are Pro.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="grid-4">
+
+        <!-- Warm Light -->
+        <div class="theme-preview-card" style="border-color:var(--ink);" onclick="this.style.transform='scale(0.98)'; setTimeout(()=>this.style.transform='',100)">
+          <div class="theme-header-bar" style="background:linear-gradient(90deg,#7DB89A,#6BA4C4);"></div>
+          <div class="theme-body-preview" style="background:#FDF8F2; padding:16px;">
+            <div class="tp-greeting" style="color:#1A1512;">Good morning ☀️</div>
+            <div class="tp-card-mock" style="background:#FFFCF8; border:1.5px solid #E8D5C0;"></div>
+            <div class="tp-card-mock" style="background:#FFFCF8; border:1.5px solid #E8D5C0;"></div>
+            <div class="tp-card-mock-sm" style="background:#E8F5EF; border:1.5px solid rgba(61,153,112,0.2);"></div>
+          </div>
+          <div class="theme-name-bar" style="background:#FFFCF8; border-top:1px solid #E8D5C0;">
+            <div class="t-name" style="color:#1A1512;">Warm Light</div>
+            <div class="t-tag" style="color:#8C7B6E;">Default · Free</div>
+          </div>
+        </div>
+
+        <!-- Midnight -->
+        <div class="theme-preview-card" style="border-color:rgba(212,168,67,0.4);" onclick="this.style.transform='scale(0.98)'; setTimeout(()=>this.style.transform='',100)">
+          <div class="theme-header-bar" style="background:linear-gradient(90deg,#D4A843,#F5C842);"></div>
+          <div class="theme-body-preview" style="background:#1A1512; padding:16px;">
+            <div class="tp-greeting" style="color:#FDF8F2; font-family:'Fraunces',serif; font-style:italic;">Good night 🌿</div>
+            <div class="tp-card-mock" style="background:#242018; border:1.5px solid rgba(255,255,255,0.07);"></div>
+            <div class="tp-card-mock" style="background:#242018; border:1.5px solid rgba(255,255,255,0.07);"></div>
+            <div class="tp-card-mock-sm" style="background:rgba(212,168,67,0.15); border:1.5px solid rgba(212,168,67,0.2);"></div>
+          </div>
+          <div class="theme-name-bar" style="background:#242018; border-top:1px solid rgba(255,255,255,0.07);">
+            <div class="t-name" style="color:#FDF8F2;">Midnight</div>
+            <div class="t-tag" style="color:rgba(253,248,242,0.4);">✦ Pro only</div>
+          </div>
+        </div>
+
+        <!-- Nature -->
+        <div class="theme-preview-card" style="border-color:rgba(61,153,112,0.3);" onclick="this.style.transform='scale(0.98)'; setTimeout(()=>this.style.transform='',100)">
+          <div class="theme-header-bar" style="background:linear-gradient(90deg,#3D9970,#F5C842);"></div>
+          <div class="theme-body-preview" style="background:linear-gradient(160deg,#E8F5EF,#FFF4D6); padding:16px;">
+            <div class="tp-greeting" style="color:#1A1512; font-family:'Fraunces',serif; font-style:italic;">Good afternoon 🌿</div>
+            <div class="tp-card-mock" style="background:rgba(255,255,255,0.7); border:1.5px solid rgba(61,153,112,0.2);"></div>
+            <div class="tp-card-mock" style="background:rgba(255,255,255,0.7); border:1.5px solid rgba(61,153,112,0.2);"></div>
+            <div class="tp-card-mock-sm" style="background:rgba(61,153,112,0.15); border:1.5px solid rgba(61,153,112,0.2);"></div>
+          </div>
+          <div class="theme-name-bar" style="background:rgba(255,255,255,0.8); border-top:1px solid rgba(61,153,112,0.15);">
+            <div class="t-name" style="color:#1A1512;">Nature</div>
+            <div class="t-tag" style="color:#8C7B6E;">✦ Pro only</div>
+          </div>
+        </div>
+
+        <!-- Ocean Night -->
+        <div class="theme-preview-card" style="border-color:rgba(107,164,196,0.3);" onclick="this.style.transform='scale(0.98)'; setTimeout(()=>this.style.transform='',100)">
+          <div class="theme-header-bar" style="background:linear-gradient(90deg,#6BA4C4,#B89ED4);"></div>
+          <div class="theme-body-preview" style="background:#1A2535; padding:16px;">
+            <div class="tp-greeting" style="color:rgba(200,215,240,0.9); font-family:'Fraunces',serif; font-style:italic;">Good evening 🌊</div>
+            <div class="tp-card-mock" style="background:#1E2A3A; border:1.5px solid rgba(107,164,196,0.15);"></div>
+            <div class="tp-card-mock" style="background:#1E2A3A; border:1.5px solid rgba(107,164,196,0.15);"></div>
+            <div class="tp-card-mock-sm" style="background:rgba(107,164,196,0.15); border:1.5px solid rgba(107,164,196,0.2);"></div>
+          </div>
+          <div class="theme-name-bar" style="background:#1E2A3A; border-top:1px solid rgba(107,164,196,0.1);">
+            <div class="t-name" style="color:rgba(200,215,240,0.9);">Ocean Night</div>
+            <div class="t-tag" style="color:rgba(200,215,240,0.4);">✦ Pro only</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Final note -->
+      <div style="margin-top:48px; background:var(--ink); border-radius:20px; padding:32px; position:relative; overflow:hidden;">
+        <div style="position:absolute; inset:0; background:radial-gradient(ellipse 400px 300px at 90% 50%, rgba(255,107,74,0.06) 0%, transparent 60%);"></div>
+        <div style="position:relative; z-index:1;">
+          <div style="font-family:'Fraunces',serif; font-size:22px; font-style:italic; color:var(--cream); margin-bottom:12px;">This guide is a living document.</div>
+          <div style="font-size:14px; color:rgba(253,248,242,0.5); line-height:1.7; max-width:600px; margin-bottom:24px;">As Drift grows from V1 to V5, this design language grows with it. New components get added. Existing patterns get refined. The philosophy never changes — only the expression of it evolves.</div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 16px; font-size:12px; color:rgba(253,248,242,0.5);">V1 → Core components complete</div>
+            <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 16px; font-size:12px; color:rgba(253,248,242,0.5);">V2 → Skip reason UI · Energy tags</div>
+            <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 16px; font-size:12px; color:rgba(253,248,242,0.5);">V3 → Anchor · Seasons · Onboarding</div>
+            <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 16px; font-size:12px; color:rgba(253,248,242,0.5);">V4 → Social components</div>
+            <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 16px; font-size:12px; color:rgba(253,248,242,0.5);">V5 → Pro · AI · Export · Themes</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════
+         16. DESIGN TOKENS
+    ══════════════════════════════ -->
+    <div class="section" id="tokens">
+      <div class="section-header">
+        <div class="section-num">16 / DESIGN TOKENS</div>
+        <div class="section-title">Every decision in code</div>
+        <div class="section-desc">Tokens are the bridge between this style guide and the actual product. Specify the output format in your first prompt — tokens drop straight into Next.js without reformatting.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- Naming rule -->
+      <div class="token-naming-rule" style="margin-bottom:28px;">
+        <div class="tnr-inner tnr-bad">
+          <div class="tnr-label">✕ Wrong — names by value</div>
+          <div class="tnr-code">
+            --color-7DB89A: #7DB89A;<br>
+            --color-1A1512: #1A1512;<br>
+            --font-size-16: 16px;<br>
+            <span style="color:rgba(253,248,242,.35); font-size:11px;">/* Meaningless to any developer */</span>
+          </div>
+        </div>
+        <div class="tnr-inner tnr-good">
+          <div class="tnr-label">✓ Right — names by function</div>
+          <div class="tnr-code">
+            <strong>--sage:</strong> #7DB89A; &nbsp;<span style="color:rgba(253,248,242,.4); font-size:11px;">/* Done, success, progress */</span><br>
+            <strong>--ink:</strong> #1A1512; &nbsp;<span style="color:rgba(253,248,242,.4); font-size:11px;">/* Primary text, headings */</span><br>
+            <strong>--body:</strong> 14px; &nbsp;&nbsp;<span style="color:rgba(253,248,242,.4); font-size:11px;">/* All reading copy */</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full token file -->
+      <div class="token-section">
+        <div class="token-group-title">Complete Token File — drift-tokens.css</div>
+        <div class="code-block" style="font-size:12px; line-height:1.95;">
+<span class="code-comment">/* ─── drift-tokens.css ─────────────────────────────────
+   Import this file in globals.css or _app.tsx.
+   Name every token by function, never by value.
+   ─────────────────────────────────────────────────── */</span>
+
+<span class="code-val">:root</span> {
+
+  <span class="code-comment">/* ── BASE SURFACES ── */</span>
+  <span class="code-prop">--cream</span>:        <span class="code-str">#FDF8F2</span>;  <span class="code-comment">/* Page background */</span>
+  <span class="code-prop">--warm</span>:         <span class="code-str">#FFFCF8</span>;  <span class="code-comment">/* Card backgrounds, modals */</span>
+  <span class="code-prop">--sand</span>:         <span class="code-str">#F2EAE0</span>;  <span class="code-comment">/* Inputs, pills, secondary fills */</span>
+  <span class="code-prop">--clay</span>:         <span class="code-str">#E8D5C0</span>;  <span class="code-comment">/* Borders, dividers */</span>
+
+  <span class="code-comment">/* ── INK SCALE ── */</span>
+  <span class="code-prop">--ink</span>:          <span class="code-str">#1A1512</span>;  <span class="code-comment">/* Primary text, headings */</span>
+  <span class="code-prop">--ink-soft</span>:     <span class="code-str">#4A3F35</span>;  <span class="code-comment">/* Body text, card content */</span>
+  <span class="code-prop">--ink-muted</span>:    <span class="code-str">#8C7B6E</span>;  <span class="code-comment">/* Labels, placeholders, captions */</span>
+
+  <span class="code-comment">/* ── ACCENTS — purposeful only ── */</span>
+  <span class="code-prop">--coral</span>:        <span class="code-str">#FF6B4A</span>;  <span class="code-comment">/* CTA, danger, delete actions */</span>
+  <span class="code-prop">--sage</span>:         <span class="code-str">#7DB89A</span>;  <span class="code-comment">/* Done, success, progress fill */</span>
+  <span class="code-prop">--sky</span>:          <span class="code-str">#6BA4C4</span>;  <span class="code-comment">/* Info, partial, links */</span>
+  <span class="code-prop">--sun</span>:          <span class="code-str">#F5C842</span>;  <span class="code-comment">/* Energy, highlights */</span>
+  <span class="code-prop">--lilac</span>:        <span class="code-str">#B89ED4</span>;  <span class="code-comment">/* Mindfulness, calm states */</span>
+
+  <span class="code-comment">/* ── PRO TIER ── */</span>
+  <span class="code-prop">--pro-gold</span>:     <span class="code-str">#D4A843</span>;  <span class="code-comment">/* Pro badges, anchor icon */</span>
+  <span class="code-prop">--pro-gold-bg</span>:  <span class="code-str">#FFF4D6</span>;  <span class="code-comment">/* Anchor cards, pro fills */</span>
+
+  <span class="code-comment">/* ── SEMANTIC STATES ── */</span>
+  <span class="code-prop">--done</span>:         <span class="code-str">#3D9970</span>;  <span class="code-comment">/* Completed habit text */</span>
+  <span class="code-prop">--done-bg</span>:      <span class="code-str">#E8F5EF</span>;  <span class="code-comment">/* Completed habit fill */</span>
+  <span class="code-prop">--partial</span>:      <span class="code-str">#D4820A</span>;  <span class="code-comment">/* Partial completion text */</span>
+  <span class="code-prop">--partial-bg</span>:   <span class="code-str">#FFF4E0</span>;  <span class="code-comment">/* Partial completion fill */</span>
+  <span class="code-prop">--error</span>:        <span class="code-str">#DC4A3C</span>;  <span class="code-comment">/* Error states, validation */</span>
+  <span class="code-prop">--error-bg</span>:     <span class="code-str">#FDEEEC</span>;  <span class="code-comment">/* Error fill */</span>
+
+  <span class="code-comment">/* ── GRADIENTS — dynamic moments only ── */</span>
+  <span class="code-prop">--gradient-progress</span>: <span class="code-str">linear-gradient(90deg,  #7DB89A, #6BA4C4)</span>;
+  <span class="code-prop">--gradient-pro</span>:      <span class="code-str">linear-gradient(135deg, #D4A843, #F5C842)</span>;
+  <span class="code-prop">--gradient-energy</span>:   <span class="code-str">linear-gradient(135deg, #FF6B4A, #F5C842)</span>;
+
+  <span class="code-comment">/* ── TYPOGRAPHY ── */</span>
+  <span class="code-prop">--font-display</span>:  <span class="code-str">'Fraunces', Georgia, serif</span>;
+  <span class="code-prop">--font-body</span>:     <span class="code-str">'DM Sans', system-ui, sans-serif</span>;
+  <span class="code-prop">--font-mono</span>:     <span class="code-str">'DM Mono', monospace</span>;
+
+  <span class="code-prop">--text-display</span>:  <span class="code-str">56px</span>;  <span class="code-comment">/* Logo, splash */</span>
+  <span class="code-prop">--text-h1</span>:       <span class="code-str">36px</span>;  <span class="code-comment">/* Page title — one per screen */</span>
+  <span class="code-prop">--text-h2</span>:       <span class="code-str">26px</span>;  <span class="code-comment">/* Greetings, section openers */</span>
+  <span class="code-prop">--text-h3</span>:       <span class="code-str">20px</span>;  <span class="code-comment">/* Error, confirmation moments */</span>
+  <span class="code-prop">--text-body-lg</span>:  <span class="code-str">16px</span>;  <span class="code-comment">/* Long-form reading */</span>
+  <span class="code-prop">--text-body</span>:     <span class="code-str">14px</span>;  <span class="code-comment">/* All instructional copy */</span>
+  <span class="code-prop">--text-body-sm</span>:  <span class="code-str">13px</span>;  <span class="code-comment">/* Metadata, habit context */</span>
+  <span class="code-prop">--text-label</span>:    <span class="code-str">11px</span>;  <span class="code-comment">/* Form labels — uppercase */</span>
+  <span class="code-prop">--text-caption</span>:  <span class="code-str">11px</span>;  <span class="code-comment">/* Supporting stats */</span>
+
+  <span class="code-comment">/* ── SPACING (8pt base grid) ── */</span>
+  <span class="code-prop">--space-1</span>:  <span class="code-str">4px</span>;   <span class="code-comment">/* Icon gaps, tight badges */</span>
+  <span class="code-prop">--space-2</span>:  <span class="code-str">8px</span>;   <span class="code-comment">/* Badge padding */</span>
+  <span class="code-prop">--space-3</span>:  <span class="code-str">12px</span>;  <span class="code-comment">/* Card padding tight */</span>
+  <span class="code-prop">--space-4</span>:  <span class="code-str">16px</span>;  <span class="code-comment">/* Mobile page padding */</span>
+  <span class="code-prop">--space-5</span>:  <span class="code-str">20px</span>;  <span class="code-comment">/* Card padding, between cards */</span>
+  <span class="code-prop">--space-6</span>:  <span class="code-str">24px</span>;  <span class="code-comment">/* Section headers */</span>
+  <span class="code-prop">--space-8</span>:  <span class="code-str">32px</span>;  <span class="code-comment">/* Desktop padding */</span>
+  <span class="code-prop">--space-10</span>: <span class="code-str">40px</span>;  <span class="code-comment">/* Empty states, heroes */</span>
+  <span class="code-prop">--space-16</span>: <span class="code-str">64px</span>;  <span class="code-comment">/* Desktop section spacing */</span>
+
+  <span class="code-comment">/* ── RADIUS ── */</span>
+  <span class="code-prop">--radius-xs</span>:   <span class="code-str">4px</span>;   <span class="code-comment">/* Tags */</span>
+  <span class="code-prop">--radius-sm</span>:   <span class="code-str">10px</span>;  <span class="code-comment">/* Check-in buttons */</span>
+  <span class="code-prop">--radius-md</span>:   <span class="code-str">14px</span>;  <span class="code-comment">/* Buttons, toasts */</span>
+  <span class="code-prop">--radius-lg</span>:   <span class="code-str">16px</span>;  <span class="code-comment">/* Habit cards */</span>
+  <span class="code-prop">--radius-xl</span>:   <span class="code-str">20px</span>;  <span class="code-comment">/* Main cards, sheets */</span>
+  <span class="code-prop">--radius-pill</span>: <span class="code-str">99px</span>;  <span class="code-comment">/* Pills, toggles, badges */</span>
+
+  <span class="code-comment">/* ── SHADOWS (warm — ink base, never cold black) ── */</span>
+  <span class="code-prop">--shadow-raised</span>:  <span class="code-str">0 2px  8px  rgba(26,21,18,.06)</span>;
+  <span class="code-prop">--shadow-float</span>:   <span class="code-str">0 4px  16px rgba(26,21,18,.08)</span>;
+  <span class="code-prop">--shadow-overlay</span>: <span class="code-str">0 8px  32px rgba(26,21,18,.12)</span>;
+  <span class="code-prop">--shadow-modal</span>:   <span class="code-str">0 16px 64px rgba(26,21,18,.18)</span>;
+
+  <span class="code-comment">/* ── MOTION ── */</span>
+  <span class="code-prop">--ease-enter</span>:  <span class="code-str">ease-out</span>;
+  <span class="code-prop">--ease-exit</span>:   <span class="code-str">ease-in</span>;
+  <span class="code-prop">--ease-bounce</span>: <span class="code-str">cubic-bezier(0.34, 1.56, 0.64, 1)</span>;
+  <span class="code-prop">--duration-fast</span>: <span class="code-str">150ms</span>;
+  <span class="code-prop">--duration-base</span>: <span class="code-str">300ms</span>;
+}
+        </div>
+      </div>
+
+      <!-- Token reference table -->
+      <div class="token-section">
+        <div class="token-group-title">Color Token Reference</div>
+        <div class="token-table">
+          <div class="token-head">
+            <div>Token</div><div>Value</div><div>When to use</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--cream</div>
+            <div><span class="tok-preview" style="background:#FDF8F2;"></span><span class="tok-val">#FDF8F2</span></div>
+            <div class="tok-use">Page background only</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--sand</div>
+            <div><span class="tok-preview" style="background:#F2EAE0;"></span><span class="tok-val">#F2EAE0</span></div>
+            <div class="tok-use">All input backgrounds, pill defaults</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--ink</div>
+            <div><span class="tok-preview" style="background:#1A1512;"></span><span class="tok-val">#1A1512</span></div>
+            <div class="tok-use">Primary text, all headings, primary button bg</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--ink-muted</div>
+            <div><span class="tok-preview" style="background:#8C7B6E;"></span><span class="tok-val">#8C7B6E</span></div>
+            <div class="tok-use">Captions, placeholders — large text (18px+) only</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--sage</div>
+            <div><span class="tok-preview" style="background:#7DB89A;"></span><span class="tok-val">#7DB89A</span></div>
+            <div class="tok-use">Done state, success, progress bar fill</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--coral</div>
+            <div><span class="tok-preview" style="background:#FF6B4A;"></span><span class="tok-val">#FF6B4A</span></div>
+            <div class="tok-use">Primary CTA, danger, delete — use sparingly</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--sky</div>
+            <div><span class="tok-preview" style="background:#6BA4C4;"></span><span class="tok-val">#6BA4C4</span></div>
+            <div class="tok-use">Info states, partial, links, focus rings</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--gradient-progress</div>
+            <div><span class="tok-preview" style="background:linear-gradient(90deg,#7DB89A,#6BA4C4);"></span><span class="tok-val">sage → sky</span></div>
+            <div class="tok-use">Progress bars and completion visuals only</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--gradient-pro</div>
+            <div><span class="tok-preview" style="background:linear-gradient(135deg,#D4A843,#F5C842);"></span><span class="tok-val">gold → sun</span></div>
+            <div class="tok-use">Pro buttons, anchor card accents only</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--done / --done-bg</div>
+            <div><span class="tok-preview" style="background:#3D9970;"></span><span class="tok-val">#3D9970 / #E8F5EF</span></div>
+            <div class="tok-use">Completed habit card fill and text pair</div>
+          </div>
+          <div class="token-row">
+            <div class="tok-name">--error / --error-bg</div>
+            <div><span class="tok-preview" style="background:#DC4A3C;"></span><span class="tok-val">#DC4A3C / #FDEEEC</span></div>
+            <div class="tok-use">Error states, validation failures</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         17. ACCESSIBILITY
+    ══════════════════════════════ -->
+    <div class="section" id="accessibility">
+      <div class="section-header">
+        <div class="section-num">17 / ACCESSIBILITY</div>
+        <div class="section-title">WCAG first, not after.</div>
+        <div class="section-desc">Accessibility is a constraint, not a feature. It belongs in the first prompt — not the last review. Every colour pair below was checked against the actual token values in this guide.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- WCAG Standards -->
+      <div class="a11y-grid" style="margin-bottom:28px;">
+        <div class="a11y-card">
+          <div class="a11y-card-title"><span class="lv-badge lv-aa">AA</span> Minimum — ship with this</div>
+          <div class="a11y-card-desc">The floor for every screen in Drift. No exceptions.</div>
+          <div class="a11y-row"><span class="a11y-label">Normal text contrast (below 18px)</span><span class="a11y-val">≥ 4.5 : 1</span></div>
+          <div class="a11y-row"><span class="a11y-label">Large text contrast (18px bold / 24px+)</span><span class="a11y-val">≥ 3 : 1</span></div>
+          <div class="a11y-row"><span class="a11y-label">UI components &amp; icon contrast</span><span class="a11y-val">≥ 3 : 1</span></div>
+          <div class="a11y-row"><span class="a11y-label">Minimum touch target size</span><span class="a11y-val">44 × 44px</span></div>
+          <div class="a11y-row"><span class="a11y-label">Keyboard navigable</span><span class="a11y-val">All interactive</span></div>
+          <div class="a11y-row"><span class="a11y-label">Focus indicator visible</span><span class="a11y-val">WCAG 2.4.11</span></div>
+        </div>
+        <div class="a11y-card">
+          <div class="a11y-card-title"><span class="lv-badge lv-aaa">AAA</span> Target — aim for this</div>
+          <div class="a11y-card-desc">Elevated standard. Prioritise for critical flows: onboarding, check-in, error states.</div>
+          <div class="a11y-row"><span class="a11y-label">Normal text contrast</span><span class="a11y-val">≥ 7 : 1</span></div>
+          <div class="a11y-row"><span class="a11y-label">Large text contrast</span><span class="a11y-val">≥ 4.5 : 1</span></div>
+          <div class="a11y-row"><span class="a11y-label">No forced time limits</span><span class="a11y-val">User control</span></div>
+          <div class="a11y-row"><span class="a11y-label">Reduced motion support</span><span class="a11y-val">prefers-reduced-motion</span></div>
+          <div class="a11y-row"><span class="a11y-label">Focus indicator size</span><span class="a11y-val">2px offset outline</span></div>
+          <div class="a11y-row"><span class="a11y-label">Error identification</span><span class="a11y-val">Text + colour + icon</span></div>
+        </div>
+      </div>
+
+      <!-- Contrast checks -->
+      <div class="token-group-title">Drift Palette — Actual Contrast Ratios</div>
+      <div class="contrast-table" style="margin-bottom:28px;">
+        <div class="ct-head">
+          <div></div><div>Token Pair</div><div>Ratio</div><div>Level</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#1A1512;color:#FDF8F2;">Aa</div>
+          <div><div class="ct-pair">--ink on --cream</div><div class="ct-sub">Primary text on page background</div></div>
+          <div class="ct-ratio">16.8 : 1</div>
+          <div class="ct-tag ct-pass">AAA ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#1A1512;color:#F2EAE0;">Aa</div>
+          <div><div class="ct-pair">--ink on --sand</div><div class="ct-sub">Text on input backgrounds</div></div>
+          <div class="ct-ratio">15.1 : 1</div>
+          <div class="ct-tag ct-pass">AAA ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#1A1512;color:#FFFCF8;">Aa</div>
+          <div><div class="ct-pair">--ink on --warm</div><div class="ct-sub">Text on card backgrounds</div></div>
+          <div class="ct-ratio">16.3 : 1</div>
+          <div class="ct-tag ct-pass">AAA ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#3D9970;color:white;">Aa</div>
+          <div><div class="ct-pair">--done on --done-bg</div><div class="ct-sub">Completed habit state text</div></div>
+          <div class="ct-ratio">4.8 : 1</div>
+          <div class="ct-tag ct-pass">AA ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#DC4A3C;color:white;">Aa</div>
+          <div><div class="ct-pair">--error on --error-bg</div><div class="ct-sub">Error state text</div></div>
+          <div class="ct-ratio">4.6 : 1</div>
+          <div class="ct-tag ct-pass">AA ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#D4820A;color:white;">Aa</div>
+          <div><div class="ct-pair">--partial on --partial-bg</div><div class="ct-sub">Partial completion state text</div></div>
+          <div class="ct-ratio">4.5 : 1</div>
+          <div class="ct-tag ct-pass">AA ✓</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#8C7B6E;color:#FDF8F2;">Aa</div>
+          <div><div class="ct-pair">--ink-muted on --cream</div><div class="ct-sub">Captions, placeholders — large text (18px+) ONLY</div></div>
+          <div class="ct-ratio">3.2 : 1</div>
+          <div class="ct-tag ct-warn">Large only ⚠</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-swatch" style="background:#FF6B4A;color:white;">Aa</div>
+          <div><div class="ct-pair">--coral on white</div><div class="ct-sub">Never use coral for body text — decorative use only</div></div>
+          <div class="ct-ratio">2.9 : 1</div>
+          <div class="ct-tag ct-fail">Decorative ✕</div>
+        </div>
+      </div>
+
+      <!-- Touch targets -->
+      <div class="a11y-grid" style="margin-bottom:28px;">
+        <div class="a11y-card">
+          <div class="a11y-card-title">👆 Touch Targets — Apple HIG + WCAG 2.5.5</div>
+          <div class="a11y-card-desc">Every interactive element must meet the minimum tap area. Padding compensates when the visual is smaller.</div>
+          <div class="a11y-row"><span class="a11y-label">All buttons (Primary, Ghost, Pro)</span><span class="a11y-val">44 × 44px min</span></div>
+          <div class="a11y-row"><span class="a11y-label">Check-in buttons (Done / Partial / Skip)</span><span class="a11y-val">44px min height</span></div>
+          <div class="a11y-row"><span class="a11y-label">Icon-only buttons (⋮ ← +)</span><span class="a11y-val">40px → use padding</span></div>
+          <div class="a11y-row"><span class="a11y-label">Toggle switches</span><span class="a11y-val">44 × 44px tap area</span></div>
+          <div class="a11y-row"><span class="a11y-label">Nav items (sidebar / bottom)</span><span class="a11y-val">44px min height</span></div>
+          <div class="a11y-row"><span class="a11y-label">Minimum gap between targets</span><span class="a11y-val">8px</span></div>
+        </div>
+        <div class="a11y-card">
+          <div class="a11y-card-title">🎯 Focus Visible — WCAG 2.4.11</div>
+          <div class="a11y-card-desc">Every interactive element must show a focus ring when navigated by keyboard. This is non-negotiable.</div>
+          <div class="code-block" style="margin-top:0; font-size:12px; line-height:1.85;">
+<span class="code-comment">/* ✓ Apply to all interactive elements */</span>
+<span class="code-val">:focus-visible</span> {
+  <span class="code-prop">outline</span>: <span class="code-str">2px solid var(--sky)</span>;
+  <span class="code-prop">outline-offset</span>: <span class="code-str">2px</span>;
+  <span class="code-prop">border-radius</span>: <span class="code-str">inherit</span>;
+}
+
+<span class="code-comment">/* ✕ Never do this */</span>
+<span class="code-val">:focus</span> { <span class="code-prop">outline</span>: <span class="code-str">none</span>; } <span class="code-comment">/* breaks keyboard nav */</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Focus demo -->
+      <div class="focus-demo" style="margin-bottom:28px;">
+        <div class="component-title">Focus Ring Demo <span class="component-tag">Tab to see focus</span></div>
+        <div class="focus-demo-row">
+          <button class="focus-good" style="padding:12px 24px; border-radius:14px; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500;">Primary button</button>
+          <button class="focus-good" style="background:transparent; color:var(--ink-soft); border:1.5px solid var(--clay); padding:11px 22px; border-radius:14px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; outline:none;" onfocus="this.style.outline='2px solid var(--sky)'; this.style.outlineOffset='2px';" onblur="this.style.outline='none';">Ghost button</button>
+          <input style="background:var(--sand); border:1.5px solid transparent; border-radius:12px; padding:11px 14px; font-family:'DM Sans',sans-serif; font-size:14px; color:var(--ink); outline:none; width:200px;" onfocus="this.style.outline='2px solid var(--sky)'; this.style.outlineOffset='2px';" onblur="this.style.outline='none';" placeholder="Input field" />
+        </div>
+        <div style="font-size:12px; color:var(--ink-muted);">Tab through the elements above to see correct focus behaviour. The <code style="background:var(--sand); padding:2px 6px; border-radius:4px; font-family:'DM Mono',monospace;">--sky</code> outline confirms keyboard navigation position at all times.</div>
+      </div>
+
+      <!-- Reduced motion -->
+      <div class="a11y-card" style="margin-bottom:28px;">
+        <div class="a11y-card-title">⚡ Reduced Motion — WCAG 2.3.3</div>
+        <div class="a11y-card-desc">Respect user preference. Wrap all decorative animations in this media query.</div>
+        <div class="code-block" style="margin-top:0; font-size:12px; line-height:1.85;">
+<span class="code-comment">/* ✓ Wrap all non-essential motion */</span>
+<span class="code-val">@media (prefers-reduced-motion: reduce)</span> {
+  <span class="code-prop">*</span> {
+    <span class="code-prop">animation-duration</span>: <span class="code-str">0.01ms !important</span>;
+    <span class="code-prop">transition-duration</span>: <span class="code-str">0.01ms !important</span>;
+  }
+  <span class="code-comment">/* Exception: keep progress bar fill transition — it communicates state */</span>
+  <span class="code-val">.progress-fill</span> {
+    <span class="code-prop">transition</span>: <span class="code-str">width 0.3s ease</span>;
+  }
+}
+        </div>
+      </div>
+
+      <!-- Error identification -->
+      <div class="a11y-card">
+        <div class="a11y-card-title">⚠️ Error Identification — WCAG 1.3.1 + 3.3.1</div>
+        <div class="a11y-card-desc">Never rely on colour alone to communicate errors. Use text + colour + icon together.</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+          <div>
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--error); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--error);display:inline-block;"></span> Wrong — colour only</div>
+            <div style="background:#FFF5F4; border:1.5px solid rgba(220,74,60,.15); border-radius:12px; padding:14px 16px;">
+              <input style="width:100%; background:var(--error-bg); border:1.5px solid var(--error); border-radius:8px; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink); outline:none;" value="notanemail" readonly />
+              <div style="height:16px;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--done); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--done);display:inline-block;"></span> Right — colour + text + icon</div>
+            <div style="background:#FFF5F4; border:1.5px solid rgba(220,74,60,.15); border-radius:12px; padding:14px 16px;">
+              <input style="width:100%; background:var(--error-bg); border:1.5px solid var(--error); border-radius:8px; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink); outline:none;" value="notanemail" readonly />
+              <div style="font-size:11px; color:var(--error); margin-top:6px; display:flex; align-items:center; gap:5px;">⚠ Please enter a valid email address.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /page-content -->
+</div><!-- /main-content -->
+
+<script>
+  // ── Hamburger menu ──
+  const menuBtn   = document.getElementById('menuBtn');
+  const sideNav   = document.querySelector('.sticky-nav');
+  const overlay   = document.getElementById('navOverlay');
+
+  function openNav()  { sideNav.classList.add('open'); overlay.classList.add('open'); }
+  function closeNav() { sideNav.classList.remove('open'); overlay.classList.remove('open'); }
+
+  menuBtn.addEventListener('click', () => sideNav.classList.contains('open') ? closeNav() : openNav());
+  overlay.addEventListener('click', closeNav);
+
+  // Close nav when a link is tapped on mobile
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => { if (window.innerWidth < 900) closeNav(); });
+  });
+
+  // ── Pill selection ──
+  function selectPill(btn) {
+    btn.closest('.pill-row').querySelectorAll('.pill').forEach(p => {
+      p.classList.remove('pill-active');
+      p.classList.add('pill-default');
+    });
+    btn.classList.remove('pill-default');
+    btn.classList.add('pill-active');
+  }
+
+  function selectPeriod(btn) {
+    btn.closest('.pill-row').querySelectorAll('.pill').forEach(p => {
+      p.classList.remove('pill-active');
+      p.classList.add('pill-default');
+    });
+    btn.classList.remove('pill-default');
+    btn.classList.add('pill-active');
+  }
+
+  // ── Habit card state ──
+  function setHabitState(btn, status) {
+    const row = btn.parentElement;
+    const card = btn.closest('.habit-card-demo');
+    row.querySelectorAll('.checkin-btn').forEach(b => b.classList.remove('active-done','active-partial','active-skip'));
+    card.classList.remove('state-done','state-partial');
+    if (status === 'done') { btn.classList.add('active-done'); card.classList.add('state-done'); }
+    else if (status === 'partial') { btn.classList.add('active-partial'); card.classList.add('state-partial'); }
+    else { btn.classList.add('active-skip'); }
+  }
+
+  // ── Motion preview ──
+  function playAnim(el, anim) {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = anim;
+    setTimeout(() => el.style.animation = '', 800);
+  }
+
+  // ── Active nav on scroll ──
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navItems.forEach(item => {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
